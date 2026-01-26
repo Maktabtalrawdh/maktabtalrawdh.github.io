@@ -13,11 +13,11 @@
         .section { margin-bottom: 15px; padding: 12px; background: #f9f9f9; border-radius: 15px; border: 1px solid #ddd; }
         .row { display: flex; gap: 8px; align-items: center; margin-top: 5px; }
         select { flex: 1; padding: 12px; border-radius: 10px; border: 2px solid #2d5a27; font-size: 15px; background: white; }
-        .dl-btn { background: #b8860b; color: white; border: none; border-radius: 10px; width: 45px; height: 45px; cursor: pointer; font-size: 1.2em; display: flex; align-items: center; justify-content: center; text-decoration: none; }
+        .dl-btn { background: #b8860b; color: white; border-radius: 10px; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1.2em; }
         .player-card { margin-top: 20px; padding: 15px; border: 2px dashed #2d5a27; border-radius: 15px; background: #fffdf5; }
         audio { width: 100%; margin-top: 10px; }
         .wa-link { display: inline-block; background: #25d366; color: white; padding: 12px 25px; border-radius: 30px; text-decoration: none; font-weight: bold; margin-top: 20px; }
-        .dev-credit { color: #2d5a27; font-weight: bold; font-size: 1.1em; margin-top: 10px; font-style: italic; }
+        .dev-credit { color: #2d5a27; font-weight: bold; font-size: 1.1em; margin-top: 10px; }
         .charity-note { margin-top: 30px; padding: 15px; font-size: 0.9em; color: #555; border-top: 1px solid #eee; }
     </style>
 </head>
@@ -40,7 +40,13 @@
             <option value="minsh">محمد صديق المنشاوي</option>
             <option value="yasser">ياسر الدوسري</option>
             <option value="shur">سعود الشريم</option>
+            <option value="sudais">عبد الرحمن السديس</option>
+            <option value="hussary">محمود خليل الحصري</option>
+            <option value="ghamdi">سعد الغامدي</option>
+            <option value="ajm">أحمد العجمي</option>
             <option value="fares">فارس عباد</option>
+            <option value="mishari">مشاري العفاسي</option>
+            <option value="nasser">ناصر القطامي</option>
         </select>
         <label style="margin-top:10px; display:block;">📖 اختر السورة:</label>
         <div class="row">
@@ -64,11 +70,16 @@
     </div>
 
     <div class="section">
-        <label>🎤 محاضرات إسلامية:</label>
+        <label>🎤 محاضرات إسلامية منوعة:</label>
         <div class="row">
             <select id="lectureSelect" onchange="runAudio(this)">
                 <option value="">-- اختر المحاضرة --</option>
                 <option value="https://ia800602.us.archive.org/20/items/rahmh_202601/rahmh.mp3">قصة رحمة (مؤثرة)</option>
+                <option value="https://archive.org/download/Mo7adarat/01.mp3">أجمل قصص الأنبياء</option>
+                <option value="https://archive.org/download/Mo7adarat/02.mp3">كيف تستعيد سعادتك؟</option>
+                <option value="https://archive.org/download/Mo7adarat/03.mp3">عجائب الاستغفار</option>
+                <option value="https://archive.org/download/Mo7adarat/04.mp3">طريقك إلى الجنة</option>
+                <option value="https://archive.org/download/Mo7adarat/05.mp3">بر الوالدين وأثره</option>
             </select>
             <a id="dl-lecture" class="dl-btn" href="#" target="_blank">📥</a>
         </div>
@@ -101,7 +112,13 @@
         "minsh": "https://server10.mp3quran.net/minsh/Mujawwad/",
         "yasser": "https://server11.mp3quran.net/yasser/",
         "shur": "https://server7.mp3quran.net/shur/",
-        "fares": "https://server8.mp3quran.net/frs_a/"
+        "sudais": "https://server11.mp3quran.net/sds/",
+        "hussary": "https://server13.mp3quran.net/hussary/Mujawwad/",
+        "ghamdi": "https://server7.mp3quran.net/s_gmd/",
+        "ajm": "https://server10.mp3quran.net/ajm/",
+        "fares": "https://server8.mp3quran.net/frs_a/",
+        "mishari": "https://server8.mp3quran.net/afs/",
+        "nasser": "https://server11.mp3quran.net/qtm/"
     };
 
     function updateSurahs() {
@@ -118,22 +135,17 @@
     function runAudio(el) {
         if(el.value) {
             player.src = el.value;
-            status.innerText = "⌛ جاري التشغيل...";
+            status.innerText = "⌛ جاري التشغيل: " + el.options[el.selectedIndex].text;
             player.play();
-            // تحديث رابط زر التنزيل المجاور
             const dlBtn = el.parentElement.querySelector('.dl-btn');
             if(dlBtn) dlBtn.href = el.value;
-            // تصفير القوائم الأخرى
             document.querySelectorAll('select').forEach(s => { if(s !== el && s !== rSelect) s.selectedIndex = 0; });
         }
     }
 
     updateSurahs();
-    
-    // عداد الوقت البسيط لضمان عدم تجمد الصفحة
     setInterval(() => {
-        const now = new Date();
-        document.getElementById('pTime').innerText = now.toLocaleTimeString('ar-YE');
+        document.getElementById('pTime').innerText = new Date().toLocaleTimeString('ar-YE');
     }, 1000);
 </script>
 </body>
