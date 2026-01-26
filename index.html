@@ -3,92 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موقع القرآن الكريم والمحاضرات</title>
-    <link rel="icon" href="https://img.icons8.com/external-flat-icons-inmotus-design/64/external-Quran-islam-flat-icons-inmotus-design.png" type="image/png">
+    <title>مكتبة الروضة - علي محمد بن فاتح</title>
     <style>
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background: linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)), 
-                        url('https://www.transparenttextures.com/patterns/arabesque.png');
-            background-color: #f4f7f6;
+            /* إضافة خلفية إسلامية هادئة */
+            background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), 
+                        url('https://www.transparenttextures.com/patterns/islamic-art.png');
+            background-color: #f0f4f2;
             text-align: center; padding: 20px; margin: 0;
         }
         .container { 
             max-width: 700px; margin: 40px auto; background: white; 
-            padding: 40px; border-radius: 20px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 8px solid #2d5a27;
+            padding: 30px; border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15); border-top: 10px solid #2d5a27;
         }
-        h1 { color: #2d5a27; font-size: 2.2em; }
+        h1 { color: #2d5a27; margin-bottom: 5px; }
         .subtitle { color: #b8860b; font-weight: bold; margin-bottom: 30px; }
-        .audio-item { 
-            margin-top: 20px; padding: 20px; background: #fdfdfd; 
-            border-radius: 15px; border: 1px solid #e0e0e0;
-        }
-        audio { width: 100%; height: 45px; margin-top: 15px; }
         
-        /* تصميم زر الإعجاب */
-        .like-section { margin-top: 20px; }
-        .like-btn {
-            background: none; border: none; cursor: pointer;
-            font-size: 30px; color: #e74c3c; transition: transform 0.2s;
+        /* تصميم قائمة المحاضرات */
+        .audio-list { text-align: right; margin-top: 20px; }
+        .audio-item { 
+            margin-bottom: 15px; padding: 15px; background: #f9f9f9; 
+            border-radius: 12px; border-right: 5px solid #2d5a27;
         }
-        .like-btn:active { transform: scale(1.3); }
-        .like-count { font-weight: bold; color: #555; display: block; margin-top: 5px; }
+        .audio-item h3 { margin: 0 0 10px 0; font-size: 1.1em; color: #333; }
+        audio { width: 100%; height: 40px; }
+
+        .like-section { margin: 10px 0; text-align: center; }
+        .like-btn { background: none; border: none; cursor: pointer; font-size: 25px; }
 
         .whatsapp-btn {
             display: inline-flex; align-items: center; gap: 10px;
             background-color: #25d366; color: white; padding: 12px 25px;
             border-radius: 30px; text-decoration: none; font-weight: bold;
-            margin-top: 30px; transition: background 0.3s;
+            margin-top: 20px;
         }
-        .stats-box {
-            margin-top: 20px; padding: 10px; background: #2d5a27;
-            color: white; display: inline-block; border-radius: 10px; font-size: 0.9em;
+        .visitor-counter {
+            margin-top: 25px; padding: 8px 15px; background: #2d5a27;
+            color: white; display: inline-block; border-radius: 8px; font-size: 0.85em;
         }
-        footer { margin-top: 50px; font-size: 0.95em; color: #555; }
+        footer { margin-top: 40px; font-size: 0.9em; color: #666; border-top: 1px solid #ddd; padding-top: 20px; }
         .dev-name { color: #2d5a27; font-weight: bold; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>مكتبة القران الكريم</h1>
-        <div class="subtitle">الموقع الرسمي لنشر المحاضرات النافعة</div>
-        
-        <div class="audio-item">
-            <h3>📖 قصة رحمة</h3>
-            <audio controls controlsList="nodownload">
-                <source src="https://ia600602.us.archive.org/20/items/rahmh_202601/rahmh.mp3" type="audio/mpeg">
-            </audio>
+        <h1>مكتبة الروضة</h1>
+        <div class="subtitle">تحت إشراف: علي محمد بن فاتح</div>
 
-            <div class="like-section">
-                <button class="like-btn" onclick="addLike()">❤️</button>
-                <span class="like-count">إعجابات: <img src="https://profile-counter.glitch.me/maktabtalrawdh-likes/count.svg" id="likeCounter" style="vertical-align: middle; filter: invert(100%);"></span>
+        <div class="audio-list">
+            <div class="audio-item">
+                <h3>📖 1. قصة رحمة</h3>
+                <audio controls>
+                    <source src="https://ia600602.us.archive.org/20/items/rahmh_202601/rahmh.mp3" type="audio/mpeg">
+                </audio>
+                <div class="like-section">
+                    <button class="like-btn" onclick="alert('شكراً لإعجابك بقصة رحمة!')">❤️</button>
+                </div>
+            </div>
+
+            <div class="audio-item">
+                <h3>📖 2. ترقبوا المحاضرة القادمة...</h3>
+                <p style="text-align:center; color:#999;">سيتم رفع المقطع الصوتي قريباً</p>
             </div>
         </div>
 
         <a href="https://wa.me/967773363750" class="whatsapp-btn" target="_blank">تواصل معنا عبر واتساب</a>
         
         <br>
-        <div class="stats-box">
-            عدد زوار الموقع: 
-            <img src="https://profile-counter.glitch.me/maktabtalrawdh/count.svg" alt="Visitor Counter" style="vertical-align: middle;">
+        <div class="visitor-counter">
+            عدد الزوار الموحد: 
+            <img src="https://profile-counter.glitch.me/maktabtalrawdh/count.svg" style="vertical-align: middle;">
         </div>
     </div>
 
     <footer>
         جميع الحقوق محفوظة &copy; 2026 <br>
-        تم الإنشاء بواسطة المبرمج: <span class="dev-name">علي محمد بن فاتح</span>
+        تصميم وتطوير المبرمج: <span class="dev-name">علي محمد بن فاتح</span>
     </footer>
-
-    <script>
-        function addLike() {
-            // كود برمجي بسيط لتنشيط العداد عند الضغط
-            const counterImg = document.getElementById('likeCounter');
-            const currentSrc = counterImg.src;
-            counterImg.src = currentSrc + "?t=" + new Date().getTime();
-            alert("شكراً على إعجابك!");
-        }
-    </script>
 </body>
-  </html>
-              
+</html>
