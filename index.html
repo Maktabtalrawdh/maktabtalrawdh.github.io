@@ -3,26 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مكتبة الروضة الشاملة - علي محمد بن فاتح</title>
+    <title>مكتبة الروضة الشاملة</title>
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f4f2; text-align: center; padding: 15px; direction: rtl; }
         .container { max-width: 550px; margin: auto; background: white; padding: 25px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 10px solid #2d5a27; }
+        .main-title { color: #2d5a27; margin: 0; font-size: 2em; }
+        .sub-title { color: #b8860b; font-weight: bold; margin-bottom: 20px; font-size: 1.1em; display: block; }
         .timer-box { background: #2d5a27; color: #ffeb3b; padding: 15px; border-radius: 15px; margin-bottom: 15px; font-weight: bold; border: 2px solid #b8860b; }
         .section { margin-bottom: 15px; padding: 15px; background: #f9f9f9; border-radius: 15px; border: 1px solid #ddd; }
         label { display: block; margin-bottom: 8px; font-weight: bold; color: #2d5a27; font-size: 0.9em; }
-        select { width: 100%; padding: 12px; border-radius: 10px; border: 2px solid #2d5a27; font-size: 16px; background: white; cursor: pointer; margin-bottom: 10px; }
+        select { width: 100%; padding: 12px; border-radius: 10px; border: 2px solid #2d5a27; font-size: 16px; background: white; cursor: pointer; }
         .player-card { margin-top: 20px; padding: 15px; border: 2px dashed #2d5a27; border-radius: 15px; background: #fffdf5; }
         audio { width: 100%; margin-top: 10px; }
         .status-msg { color: #b8860b; font-weight: bold; font-size: 0.9em; margin-bottom: 5px; }
         .wa-link { display: inline-block; background: #25d366; color: white; padding: 12px 25px; border-radius: 30px; text-decoration: none; font-weight: bold; margin-top: 20px; }
-        .reciter-label { color: #b8860b; font-size: 0.8em; margin-bottom: 5px; display: block; }
+        .dev-credit { color: #2d5a27; font-weight: bold; font-size: 1.1em; margin-top: 10px; font-style: italic; }
+        .charity-note { margin-top: 30px; padding: 15px; font-size: 0.95em; color: #555; line-height: 1.6; border-top: 1px solid #eee; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1 style="color: #2d5a27; margin: 0 0 5px 0;">مكتبة الروضة الشاملة</h1>
-    <p style="color: #b8860b; font-weight: bold; margin-bottom: 15px;">المبرمج: علي محمد بن فاتح</p>
+    <h1 class="main-title">مكتبة الروضة الشاملة</h1>
+    <span class="sub-title">(المصحف الكامل - أذكار - أدعية - محاضرات إسلامية)</span>
 
     <div class="timer-box">
         <div id="pName">جاري جلب المواقيت...</div>
@@ -30,11 +33,11 @@
     </div>
 
     <div class="section">
-        <span class="reciter-label">خطوة 1: اختر صوت القارئ الذي تحبه</span>
+        <label>🎤 اختر القارئ:</label>
         <select id="reciterSelect" onchange="updateSurahs()">
             <option value="maher">ماهر المعيقلي</option>
-            <option value="abdulsamad">عبد الباسط عبد الصمد (مجوّد)</option>
-            <option value="minsh">محمد صديق المنشاوي (مجوّد)</option>
+            <option value="abdulsamad">عبد الباسط عبد الصمد</option>
+            <option value="minsh">محمد صديق المنشاوي</option>
             <option value="yasser">ياسر الدوسري</option>
             <option value="shur">سعود الشريم</option>
             <option value="sudais">عبد الرحمن السديس</option>
@@ -45,17 +48,14 @@
             <option value="mishari">مشاري العفاسي</option>
             <option value="nasser">ناصر القطامي</option>
         </select>
-        
-        <span class="reciter-label">خطوة 2: اختر السورة للتشغيل</span>
-        <select id="quranSelect" onchange="runAudio(this)">
-            <option value="">-- اختر السورة --</option>
-        </select>
+        <label style="margin-top:10px;">📖 اختر السورة:</label>
+        <select id="quranSelect" onchange="runAudio(this)"></select>
     </div>
 
     <div class="section">
-        <label>☀️ أذكار الصباح والمساء والرقية:</label>
+        <label>☀️ الأذكار والرقية:</label>
         <select id="azkarSelect" onchange="runAudio(this)">
-            <option value="">-- اختر من الأذكار --</option>
+            <option value="">-- اختر من القائمة --</option>
             <option value="https://ia902808.us.archive.org/31/items/athkar-idrees-abkar/Athkar%20Idrees%20Abkar.mp3">أذكار الصباح والمساء - إدريس ابكر</option>
             <option value="https://ia902808.us.archive.org/31/items/athkar-idrees-abkar/athkar_05.mp3">أذكار الصباح - فارس عباد</option>
             <option value="https://ia902808.us.archive.org/31/items/athkar-idrees-abkar/athkar_06.mp3">أذكار المساء - فارس عباد</option>
@@ -64,10 +64,10 @@
     </div>
 
     <div class="section">
-        <label>🎤 محاضرات إسلامية وقصص:</label>
+        <label>🎤 محاضرات إسلامية:</label>
         <select id="lectureSelect" onchange="runAudio(this)">
             <option value="">-- اختر المحاضرة --</option>
-            <option value="https://ia800602.us.archive.org/20/items/rahmh_202601/rahmh.mp3">قصة رحمة (مؤثرة جداً)</option>
+            <option value="https://ia800602.us.archive.org/20/items/rahmh_202601/rahmh.mp3">قصة رحمة (مؤثرة)</option>
         </select>
     </div>
 
@@ -76,7 +76,12 @@
         <audio id="mainPlayer" controls preload="auto"></audio>
     </div>
 
-    <a href="https://wa.me/967773363750" class="wa-link">تواصل معنا عبر واتساب</a>
+    <a href="https://wa.me/967773363750" class="wa-link">للتواصل مع المطور</a>
+    <div class="dev-credit">مبرمج الموقع علي فاتح ابورغد</div>
+
+    <div class="charity-note">
+        الصفحة صدقة جارية غير ربحية ساعد في نشرها ولك الأجر والثواب إن شاء الله
+    </div>
 </div>
 
 <script>
@@ -87,7 +92,6 @@
 
     const surahs = ["الفاتحة","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف","الأنفال","التوبة","يونس","هود","يوسف","الرعد","إبراهيم","الحجر","النحل","الإسراء","الكهف","مريم","طه","الأنبياء","الحج","المؤمنون","النور","الفرقان","الشعراء","النمل","القصص","العنكبوت","الروم","لقمان","السجدة","الأحزاب","سبأ","فاطر","يس","الصافات","ص","الزمر","غافر","فصلت","الشورى","الزخرف","الدخان","الجاثية","الأحقاف","محمد","الفتح","الحجرات","ق","الذاريات","الطور","النجم","القمر","الرحمن","الواقعة","الحديد","المجادلة","الحشر","الممتحنة","الصف","الجمعة","المنافقون","التغابن","الطلاق","التحريم","الملك","القلم","الحاقة","المعارج","نوح","الجن","المزمل","المدثر","القيامة","الإنسان","المرسلات","النبأ","النازعات","عبس","التكوير","الانفطار","المطففين","الانشقاق","البروج","الطارق","الأعلى","الغاشية","الفجر","البلد","الشمس","الليل","الضحى","الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات","القارعة","التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون","النصر","المسد","الإخلاص","الفلق","الناس"];
 
-    // خريطة السيرفرات المحدثة (12 قارئ)
     const recitersPaths = {
         "maher": "https://server12.mp3quran.net/maher/",
         "abdulsamad": "https://server7.mp3quran.net/basit/Mujawwad/",
@@ -110,30 +114,27 @@
             let opt = document.createElement('option');
             let num = (i + 1).toString().padStart(3, '0');
             opt.value = `${path}${num}.mp3`;
-            opt.text = `سورة ${n} - بصوت ${rSelect.options[rSelect.selectedIndex].text}`;
+            opt.text = `سورة ${n}`;
             qSelect.add(opt);
         });
     }
 
     function runAudio(el) {
         if(el.value) {
-            player.pause();
             player.src = el.value;
-            status.innerText = "⌛ جارٍ تحميل " + el.options[el.selectedIndex].text;
+            status.innerText = "⌛ جارٍ التحميل: " + el.options[el.selectedIndex].text;
             player.load();
             player.play().then(() => {
                 status.innerText = "▶️ تشغيل: " + el.options[el.selectedIndex].text;
             }).catch(() => {
                 status.innerText = "⚠️ اضغط تشغيل للبدء";
             });
-            // تصفير القوائم الأخرى لعدم التداخل
             document.querySelectorAll('select').forEach(s => { if(s !== el && s !== rSelect) s.selectedIndex = 0; });
         }
     }
 
-    updateSurahs(); // تعبئة السور لأول قارئ عند الفتح
+    updateSurahs();
     
-    // عداد أوقات الصلاة بتوقيت صنعاء
     async function startPrayerTimer() {
         try {
             const res = await fetch('https://api.aladhan.com/v1/timingsByCity?city=Sanaa&country=Yemen&method=4');
@@ -153,10 +154,3 @@
                 const h = Math.floor(diff/3600000), m = Math.floor((diff%3600000)/60000), s = Math.floor((diff%60000)/1000);
                 document.getElementById('pName').innerText = "المتبقي لأذان " + next.n;
                 document.getElementById('pTime').innerText = `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
-            }, 1000);
-        } catch(e) { document.getElementById('pName').innerText = "توقيت اليمن (صنعاء)"; }
-    }
-    startPrayerTimer();
-</script>
-</body>
-</html>
