@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقع القرآن الكريم والمحاضرات</title>
+    <link rel="icon" href="https://img.icons8.com/external-flat-icons-inmotus-design/64/external-Quran-islam-flat-icons-inmotus-design.png" type="image/png">
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)), 
+                        url('https://www.transparenttextures.com/patterns/arabesque.png');
+            background-color: #f4f7f6;
+            text-align: center; padding: 20px; margin: 0;
+        }
+        .container { 
+            max-width: 700px; margin: 40px auto; background: white; 
+            padding: 40px; border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 8px solid #2d5a27;
+        }
+        h1 { color: #2d5a27; font-size: 2.2em; }
+        .subtitle { color: #b8860b; font-weight: bold; margin-bottom: 30px; }
+        .audio-item { 
+            margin-top: 20px; padding: 20px; background: #fdfdfd; 
+            border-radius: 15px; border: 1px solid #e0e0e0;
+        }
+        audio { width: 100%; height: 45px; margin-top: 15px; }
+        
+        /* تصميم زر الإعجاب */
+        .like-section { margin-top: 20px; }
+        .like-btn {
+            background: none; border: none; cursor: pointer;
+            font-size: 30px; color: #e74c3c; transition: transform 0.2s;
+        }
+        .like-btn:active { transform: scale(1.3); }
+        .like-count { font-weight: bold; color: #555; display: block; margin-top: 5px; }
+
+        .whatsapp-btn {
+            display: inline-flex; align-items: center; gap: 10px;
+            background-color: #25d366; color: white; padding: 12px 25px;
+            border-radius: 30px; text-decoration: none; font-weight: bold;
+            margin-top: 30px; transition: background 0.3s;
+        }
+        .stats-box {
+            margin-top: 20px; padding: 10px; background: #2d5a27;
+            color: white; display: inline-block; border-radius: 10px; font-size: 0.9em;
+        }
+        footer { margin-top: 50px; font-size: 0.95em; color: #555; }
+        .dev-name { color: #2d5a27; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>مكتبة القران الكريم</h1>
+        <div class="subtitle">الموقع الرسمي لنشر المحاضرات النافعة</div>
+        
+        <div class="audio-item">
+            <h3>📖 قصة رحمة</h3>
+            <audio controls controlsList="nodownload">
+                <source src="https://ia600602.us.archive.org/20/items/rahmh_202601/rahmh.mp3" type="audio/mpeg">
+            </audio>
+
+            <div class="like-section">
+                <button class="like-btn" onclick="addLike()">❤️</button>
+                <span class="like-count">إعجابات: <img src="https://profile-counter.glitch.me/maktabtalrawdh-likes/count.svg" id="likeCounter" style="vertical-align: middle; filter: invert(100%);"></span>
+            </div>
+        </div>
+
+        <a href="https://wa.me/967773363750" class="whatsapp-btn" target="_blank">تواصل معنا عبر واتساب</a>
+        
+        <br>
+        <div class="stats-box">
+            عدد زوار الموقع: 
+            <img src="https://profile-counter.glitch.me/maktabtalrawdh/count.svg" alt="Visitor Counter" style="vertical-align: middle;">
+        </div>
+    </div>
+
+    <footer>
+        جميع الحقوق محفوظة &copy; 2026 <br>
+        تم الإنشاء بواسطة المبرمج: <span class="dev-name">علي محمد بن فاتح</span>
+    </footer>
+
+    <script>
+        function addLike() {
+            // كود برمجي بسيط لتنشيط العداد عند الضغط
+            const counterImg = document.getElementById('likeCounter');
+            const currentSrc = counterImg.src;
+            counterImg.src = currentSrc + "?t=" + new Date().getTime();
+            alert("شكراً على إعجابك!");
+        }
+    </script>
+</body>
+  </html>
+              
