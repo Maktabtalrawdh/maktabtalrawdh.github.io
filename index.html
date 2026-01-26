@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مكتبة الروضة الشاملة - علي محمد بن فاتح</title>
     <style>
-        /* التنسيقات الاحترافية التي أبدعت فيها */
         @keyframes moveBg { from { background-position: 0 0; } to { background-position: 100px 100px; } }
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
@@ -14,137 +13,67 @@
             animation: moveBg 25s linear infinite;
             text-align: center; padding: 20px; margin: 0;
         }
-        .container { 
-            max-width: 600px; margin: 20px auto; background: rgba(255, 255, 255, 0.95); 
-            padding: 25px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 10px solid #2d5a27;
-        }
-        .prayer-timer { background: #2d5a27; color: white; padding: 15px; border-radius: 15px; margin-bottom: 20px; border: 2px solid #b8860b; }
-        #timerDisplay { font-size: 1.4em; color: #ffeb3b; font-weight: bold; }
+        .container { max-width: 600px; margin: 20px auto; background: rgba(255, 255, 255, 0.95); padding: 25px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 10px solid #2d5a27; }
         .section-box { margin-top: 15px; padding: 15px; background: #f9f9f9; border-radius: 12px; border: 1px solid #eee; }
-        .select-wrapper { display: flex; gap: 10px; align-items: center; }
-        select { flex: 1; padding: 12px; border-radius: 10px; border: 2px solid #2d5a27; cursor: pointer; }
-        .download-btn { background: #b8860b; color: white; border: none; border-radius: 10px; width: 45px; height: 45px; cursor: pointer; font-size: 1.2em; display: flex; align-items: center; justify-content: center; }
-        .player-area { margin-top: 20px; padding: 15px; background: #fff; border-radius: 15px; border: 2px dashed #2d5a27; }
-        audio { width: 100%; height: 45px; }
-        #statusText { color: #b8860b; font-weight: bold; margin-bottom: 5px; }
+        .btn-play { width: 100%; padding: 15px; background: #2d5a27; color: white; border: none; border-radius: 10px; font-size: 1.1em; cursor: pointer; font-weight: bold; margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .btn-play:active { background: #b8860b; }
+        select { width: 100%; padding: 12px; border-radius: 10px; border: 2px solid #2d5a27; font-size: 1em; }
         .whatsapp-btn { display: inline-flex; align-items: center; gap: 10px; background-color: #25d366; color: white; padding: 12px 25px; border-radius: 30px; text-decoration: none; font-weight: bold; margin-top: 20px; }
+        .info-text { font-size: 0.85em; color: #666; margin-top: 10px; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 style="color: #2d5a27; margin:0;">مكتبة الروضة الشاملة</h1>
+        <h1 style="color: #2d5a27;">مكتبة الروضة الشاملة</h1>
         <p style="color: #b8860b; font-weight: bold;">المبرمج: علي محمد بن فاتح</p>
 
-        <div class="prayer-timer">
-            <div id="prayerName">جاري تحديد موقعك...</div>
-            <div id="timerDisplay">00:00:00</div>
-        </div>
-
         <div class="section-box">
-            <label>📖 المصحف الكامل (ماهر المعيقلي):</label>
-            <div class="select-wrapper">
-                <select id="surahSelect" onchange="loadAndPlay(this)"></select>
-                <button class="download-btn" onclick="downloadMe('surahSelect')">📥</button>
-            </div>
+            <label>📖 اختر السورة (ماهر المعيقلي):</label>
+            <select id="surahSelect"></select>
+            <button class="btn-play" onclick="openAudio('surahSelect')"><span>▶️</span> تشغيل / تحميل السورة</button>
         </div>
 
         <div class="section-box">
             <label>☀️ أذكار حصن المسلم:</label>
-            <div class="select-wrapper">
-                <select id="azkarSelect" onchange="loadAndPlay(this)">
-                    <option value="">-- اختر من الأذكار --</option>
-                    <option value="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Kevin_MacLeod/Impact_Andante/Kevin_MacLeod_-_01_-_Impact_Andante.mp3">تجربة صوت (اختبار)</option>
-                    <option value="https://ia800706.us.archive.org/24/items/Hisn_Al-Muslim_Audio/027.mp3">أذكار الصباح</option>
-                    <option value="https://ia800706.us.archive.org/24/items/Hisn_Al-Muslim_Audio/028.mp3">أذكار المساء</option>
-                </select>
-                <button class="download-btn" onclick="downloadMe('azkarSelect')">📥</button>
-            </div>
+            <select id="azkarSelect">
+                <option value="https://archive.org/download/hisn-al-muslim/027.mp3">أذكار الصباح</option>
+                <option value="https://archive.org/download/hisn-al-muslim/028.mp3">أذكار المساء</option>
+                <option value="https://archive.org/download/hisn-al-muslim/029.mp3">أذكار النوم</option>
+            </select>
+            <button class="btn-play" onclick="openAudio('azkarSelect')"><span>☀️</span> تشغيل / تحميل الذكر</button>
         </div>
 
         <div class="section-box">
-            <label>🤲 الرقية والأدعية:</label>
-            <div class="select-wrapper">
-                <select id="duaSelect" onchange="loadAndPlay(this)">
-                    <option value="">-- اختر من القائمة --</option>
-                    <option value="https://ia800602.us.archive.org/20/items/rahmh_202601/roqia.mp3">الرقية الشرعية</option>
-                </select>
-                <button class="download-btn" onclick="downloadMe('duaSelect')">📥</button>
-            </div>
+            <label>🤲 الرقية الشرعية:</label>
+            <select id="duaSelect">
+                <option value="https://ia800602.us.archive.org/20/items/rahmh_202601/roqia.mp3">الرقية الشرعية الكاملة</option>
+            </select>
+            <button class="btn-play" onclick="openAudio('duaSelect')"><span>🤲</span> تشغيل / تحميل الرقية</button>
         </div>
 
-        <div class="player-area">
-            <div id="statusText">🔊 اختر ملفاً للبدء</div>
-            <audio id="mainAudio" controls preload="auto"></audio>
-        </div>
-
+        <p class="info-text">ملاحظة: سيفتح الصوت في مشغل هاتفك لضمان عمله دون انقطاع.</p>
+        
         <a href="https://wa.me/967773363750" class="whatsapp-btn">تواصل معنا عبر واتساب</a>
     </div>
 
     <script>
-        const audio = document.getElementById('mainAudio');
-        const status = document.getElementById('statusText');
-
-        // وظيفة التشغيل القوية
-        function loadAndPlay(el) {
-            if (!el.value) return;
-            
-            // 1. تحديث الحالة
-            status.textContent = "⌛ جارٍ الاتصال بالسيرفر...";
-            
-            // 2. تغيير المصدر
-            audio.src = el.value;
-            audio.load(); // إجبار المتصفح على تحميل الملف الجديد
-
-            // 3. محاولة التشغيل
-            const playPromise = audio.play();
-            
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    status.textContent = "▶️ تشغيل: " + el.options[el.selectedIndex].text;
-                }).catch(error => {
-                    status.textContent = "⚠️ اضغط زر التشغيل أدناه للبدء";
-                    console.log("Autoplay prevented");
-                });
-            }
-
-            // تصفير القوائم الأخرى
-            document.querySelectorAll('select').forEach(s => { if(s !== el) s.selectedIndex = 0; });
-        }
-
-        // ملء قائمة السور بروابط مباشرة 100%
+        // ملء قائمة السور
         const surahs = ["الفاتحة","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف","الأنفال","التوبة","يونس","هود","يوسف","الرعد","إبراهيم","الحجر","النحل","الإسراء","الكهف","مريم","طه","الأنبياء","الحج","المؤمنون","النور","الفرقان","الشعراء","النمل","القصص","العنكبوت","الروم","لقمان","السجدة","الأحزاب","سبأ","فاطر","يس","الصافات","ص","الزمر","غافر","فصلت","الشورى","الزخرف","الدخان","الجاثية","الأحقاف","محمد","الفتح","الحجرات","ق","الذاريات","الطور","النجم","القمر","الرحمن","الواقعة","الحديد","المجادلة","الحشر","الممتحنة","الصف","الجمعة","المنافقون","التغابن","الطلاق","التحريم","الملك","القلم","الحاقة","المعارج","نوح","الجن","المزمل","المدثر","القيامة","الإنسان","المرسلات","النبأ","النازعات","عبس","التكوير","الانفطار","المطففين","الانشقاق","البروج","الطارق","الأعلى","الغاشية","الفجر","البلد","الشمس","الليل","الضحى","الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات","القارعة","التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون","النصر","المسد","الإخلاص","الفلق","الناس"];
         const sSelect = document.getElementById('surahSelect');
-        sSelect.innerHTML = '<option value="">-- اختر السورة --</option>';
         surahs.forEach((n, i) => {
             let opt = document.createElement('option');
-            let num = (i + 1).toString().padStart(3, '0');
-            opt.value = `https://server12.mp3quran.net/maher/${num}.mp3`;
+            opt.value = `https://server12.mp3quran.net/maher/${(i+1).toString().padStart(3,'0')}.mp3`;
             opt.textContent = `سورة ${n}`;
             sSelect.appendChild(opt);
         });
 
-        // عداد الأذان التلقائي (مبسط للعمل السريع)
-        async function initPrayer() {
-            try {
-                const res = await fetch('https://api.aladhan.com/v1/timingsByCity?city=Sanaa&country=Yemen&method=4');
-                const data = await res.json();
-                const t = data.data.timings;
-                const prayers = { "الفجر": t.Fajr, "الظهر": t.Dhuhr, "العصر": t.Asr, "المغرب": t.Maghrib, "العشاء": t.Isha };
-                
-                setInterval(() => {
-                    const now = new Date();
-                    let nextP = "الفجر", nextT = new Date();
-                    // منطق بسيط لحساب الصلاة القادمة
-                    document.getElementById('prayerName').innerText = "مواقيت الصلاة مفعلة";
-                    document.getElementById('timerDisplay').innerText = now.toLocaleTimeString('ar-YE');
-                }, 1000);
-            } catch(e) { document.getElementById('prayerName').innerText = "يرجى الاتصال بالإنترنت"; }
-        }
-        initPrayer();
-
-        function downloadMe(id) {
-            const val = document.getElementById(id).value;
-            if(val) window.open(val, '_blank');
+        // الوظيفة السحرية للتشغيل
+        function openAudio(id) {
+            const url = document.getElementById(id).value;
+            if(url) {
+                // فتح الرابط في نافذة جديدة يضمن التشغيل في مشغل الهاتف الأصلي
+                window.open(url, '_blank');
+            }
         }
     </script>
 </body>
