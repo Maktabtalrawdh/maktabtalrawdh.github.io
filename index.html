@@ -34,12 +34,12 @@
     </div>
 
     <div class="section">
-        <label>☀️ أذكار حصن المسلم:</label>
+        <label>☀️ أذكار الصباح والمساء:</label>
         <select id="azkarSelect" onchange="runAudio(this)">
             <option value="">-- اختر من الأذكار --</option>
-            <option value="https://archive.org/download/hisn-al-muslim/027.mp3">أذكار الصباح</option>
-            <option value="https://archive.org/download/hisn-al-muslim/028.mp3">أذكار المساء</option>
-            <option value="https://archive.org/download/hisn-al-muslim/029.mp3">أذكار النوم</option>
+            <option value="https://ia902808.us.archive.org/31/items/athkar-idrees-abkar/Athkar%20Idrees%20Abkar.mp3">أذكار الصباح والمساء - إدريس ابكر</option>
+            <option value="https://ia902808.us.archive.org/31/items/athkar-idrees-abkar/athkar_05.mp3">أذكار الصباح - فارس عباد</option>
+            <option value="https://ia902808.us.archive.org/31/items/athkar-idrees-abkar/athkar_06.mp3">أذكار المساء - فارس عباد</option>
         </select>
     </div>
 
@@ -71,7 +71,6 @@
     const player = document.getElementById('mainPlayer');
     const status = document.getElementById('status');
 
-    // وظيفة التشغيل الاحترافية
     function runAudio(el) {
         if(el.value) {
             player.pause();
@@ -85,12 +84,10 @@
                 status.innerText = "⚠️ اضغط تشغيل للبدء";
             });
 
-            // تصفير القوائم الأخرى
             document.querySelectorAll('select').forEach(s => { if(s !== el) s.selectedIndex = 0; });
         }
     }
 
-    // تعبئة قائمة السور تلقائياً
     const surahs = ["الفاتحة","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف","الأنفال","التوبة","يونس","هود","يوسف","الرعد","إبراهيم","الحجر","النحل","الإسراء","الكهف","مريم","طه","الأنبياء","الحج","المؤمنون","النور","الفرقان","الشعراء","النمل","القصص","العنكبوت","الروم","لقمان","السجدة","الأحزاب","سبأ","فاطر","يس","الصافات","ص","الزمر","غافر","فصلت","الشورى","الزخرف","الدخان","الجاثية","الأحقاف","محمد","الفتح","الحجرات","ق","الذاريات","الطور","النجم","القمر","الرحمن","الواقعة","الحديد","المجادلة","الحشر","الممتحنة","الصف","الجمعة","المنافقون","التغابن","الطلاق","التحريم","الملك","القلم","الحاقة","المعارج","نوح","الجن","المزمل","المدثر","القيامة","الإنسان","المرسلات","النبأ","النازعات","عبس","التكوير","الانفطار","المطففين","الانشقاق","البروج","الطارق","الأعلى","الغاشية","الفجر","البلد","الشمس","الليل","الضحى","الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات","القارعة","التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون","النصر","المسد","الإخلاص","الفلق","الناس"];
     const qSelect = document.getElementById('quranSelect');
     surahs.forEach((n, i) => {
@@ -100,7 +97,6 @@
         qSelect.add(opt);
     });
 
-    // عداد الصلاة (افتراضي صنعاء)
     async function startPrayerTimer() {
         try {
             const res = await fetch('https://api.aladhan.com/v1/timingsByCity?city=Sanaa&country=Yemen&method=4');
@@ -126,6 +122,5 @@
     }
     startPrayerTimer();
 </script>
-
 </body>
 </html>
