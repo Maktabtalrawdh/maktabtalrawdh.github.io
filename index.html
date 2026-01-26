@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المصحف الكامل - القارئ ماهر المعيقلي</title>
+    <title>مكتبة الروضة الشاملة - علي محمد بن فاتح</title>
     <style>
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
@@ -20,12 +20,15 @@
         h1 { color: #2d5a27; margin-bottom: 5px; }
         .subtitle { color: #b8860b; font-weight: bold; margin-bottom: 20px; }
         
-        .quran-section { margin-top: 25px; padding: 20px; background: #f9f9f9; border-radius: 15px; }
+        .section-box { margin-top: 20px; padding: 20px; background: #f9f9f9; border-radius: 15px; border: 1px solid #eee; }
+        label { font-weight: bold; color: #2d5a27; display: block; margin-bottom: 10px; }
         select { 
             width: 100%; padding: 12px; border-radius: 10px; border: 2px solid #2d5a27;
-            font-size: 1.1em; font-family: inherit; cursor: pointer; margin-bottom: 20px;
+            font-size: 1.05em; font-family: inherit; cursor: pointer; background: white;
         }
-        audio { width: 100%; height: 50px; }
+        .player-area { margin-top: 15px; padding: 15px; background: #fff; border-radius: 10px; }
+        audio { width: 100%; height: 45px; }
+        #statusText { color: #b8860b; font-weight: bold; margin-top: 10px; font-size: 0.9em; }
 
         .whatsapp-btn {
             display: inline-flex; align-items: center; gap: 10px;
@@ -42,19 +45,40 @@
 </head>
 <body>
     <div class="container">
-        <h1>مكتبة الروضة القرآنيـة</h1>
-        <div class="subtitle">المصحف كاملاً بصوت الشيخ ماهر المعيقلي</div>
+        <h1>مكتبة الروضة الشاملة</h1>
+        <div class="subtitle">المصحف الكامل - الأذكار - الأدعية</div>
 
-        <div class="quran-section">
-            <label for="surahSelect">اختر السورة الكريمة:</label><br><br>
-            <select id="surahSelect" onchange="playSurah()">
+        <div class="section-box">
+            <label>📖 المصحف الكامل (ماهر المعيقلي):</label>
+            <select id="surahSelect" onchange="playMedia(this)">
                 <option value="">-- اختر السورة --</option>
-                </select>
+            </select>
+        </div>
 
-            <h3 id="surahTitle">📖 اختر سورة للاستماع</h3>
+        <div class="section-box">
+            <label>☀️ الأذكار اليومية:</label>
+            <select id="azkarSelect" onchange="playMedia(this)">
+                <option value="">-- اختر من الأذكار --</option>
+                <option value="https://server12.mp3quran.net/maher/115.mp3">أذكار الصباح</option>
+                <option value="https://server12.mp3quran.net/maher/116.mp3">أذكار المساء</option>
+                <option value="https://server12.mp3quran.net/maher/117.mp3">أذكار النوم</option>
+            </select>
+        </div>
+
+        <div class="section-box">
+            <label>🤲 أدعية مختارة:</label>
+            <select id="duaSelect" onchange="playMedia(this)">
+                <option value="">-- اختر من الأدعية --</option>
+                <option value="https://server12.mp3quran.net/maher/118.mp3">دعاء ختم القرآن</option>
+                <option value="https://server12.mp3quran.net/maher/119.mp3">دعاء القنوت</option>
+                <option value="https://server12.mp3quran.net/maher/120.mp3">الرقية الشرعية</option>
+            </select>
+        </div>
+
+        <div class="player-area">
+            <div id="statusText">جاهز للتشغيل...</div>
             <audio id="mainAudio" controls>
                 <source id="audioSource" src="" type="audio/mpeg">
-                متصفحك لا يدعم مشغل الصوت.
             </audio>
         </div>
 
@@ -62,41 +86,47 @@
         
         <br>
         <div class="visitor-counter">
-            عدد زوار المصحف: 
+            عدد زوار المكتبة: 
             <img src="https://profile-counter.glitch.me/maktabtalrawdh/count.svg" style="vertical-align: middle;">
         </div>
     </div>
 
     <footer>
-        تمت البرمجة بواسطة: <span class="dev-name">علي محمد بن فاتح</span> <br>
+        تم التطوير بواسطة المبرمج: <span class="dev-name">علي محمد بن فاتح</span> <br>
         جميع الحقوق محفوظة &copy; 2026
     </footer>
 
     <script>
+        // توليد قائمة السور
         const surahs = ["الفاتحة","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف","الأنفال","التوبة","يونس","هود","يوسف","الرعد","إبراهيم","الحجر","النحل","الإسراء","الكهف","مريم","طه","الأنبياء","الحج","المؤمنون","النور","الفرقان","الشعراء","النمل","القصص","العنكبوت","الروم","لقمان","السجدة","الأحزاب","سبأ","فاطر","يس","الصافات","ص","الزمر","غافر","فصلت","الشورى","الزخرف","الدخان","الجاثية","الأحقاف","محمد","الفتح","الحجرات","ق","الذاريات","الطور","النجم","القمر","الرحمن","الواقعة","الحديد","المجادلة","الحشر","الممتحنة","الصف","الجمعة","المنافقون","التغابن","الطلاق","التحريم","الملك","القلم","الحاقة","المعارج","نوح","الجن","المزمل","المدثر","القيامة","الإنسان","المرسلات","النبأ","النازعات","عبس","التكوير","الانفطار","المطففين","الانشقاق","البروج","الطارق","الأعلى","الغاشية","الفجر","البلد","الشمس","الليل","الضحى","الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات","القارعة","التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون","النصر","المسد","الإخلاص","الفلق","الناس"];
-
-        const select = document.getElementById('surahSelect');
+        const surahSelect = document.getElementById('surahSelect');
         surahs.forEach((name, index) => {
             let option = document.createElement('option');
             let num = (index + 1).toString().padStart(3, '0');
             option.value = `https://server12.mp3quran.net/maher/${num}.mp3`;
-            option.textContent = `${index + 1}. سورة ${name}`;
-            select.appendChild(option);
+            option.textContent = `سورة ${name}`;
+            surahSelect.appendChild(option);
         });
 
-        function playSurah() {
+        // وظيفة التشغيل الموحدة
+        function playMedia(element) {
             const audio = document.getElementById('mainAudio');
             const source = document.getElementById('audioSource');
-            const select = document.getElementById('surahSelect');
-            const title = document.getElementById('surahTitle');
+            const status = document.getElementById('statusText');
 
-            if(select.value) {
-                source.src = select.value;
-                title.textContent = "📖 جارٍ تشغيل: " + select.options[select.selectedIndex].text;
+            if(element.value) {
+                source.src = element.value;
+                status.textContent = "🔊 جارٍ تشغيل: " + element.options[element.selectedIndex].text;
                 audio.load();
                 audio.play();
+                
+                // تصفير الاختيارات الأخرى
+                document.querySelectorAll('select').forEach(s => {
+                    if(s !== element) s.selectedIndex = 0;
+                });
             }
         }
     </script>
 </body>
-</html>
+    </html>
+
