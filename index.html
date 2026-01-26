@@ -5,28 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مكتبة الروضة الشاملة - علي محمد بن فاتح</title>
     <style>
+        /* إضافة حركة للخلفية */
+        @keyframes moveBackground {
+            0% { background-position: 0 0; }
+            100% { background-position: 100px 100px; }
+        }
+
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), 
+            /* الخلفية المتحركة */
+            background: linear-gradient(rgba(240, 244, 242, 0.85), rgba(240, 244, 242, 0.85)), 
                         url('https://www.transparenttextures.com/patterns/islamic-art.png');
             background-color: #f0f4f2;
+            animation: moveBackground 20s linear infinite; /* تحريك الزخارف ببطء */
             text-align: center; padding: 20px; margin: 0;
         }
+
         .container { 
-            max-width: 700px; margin: 20px auto; background: white; 
-            padding: 30px; border-radius: 20px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15); border-top: 10px solid #2d5a27;
+            max-width: 700px; margin: 20px auto; background: rgba(255, 255, 255, 0.95); 
+            padding: 30px; border-radius: 25px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1); border-top: 10px solid #2d5a27;
+            position: relative; z-index: 1;
         }
-        h1 { color: #2d5a27; margin-bottom: 5px; }
+
+        h1 { color: #2d5a27; margin-bottom: 5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.05); }
         .subtitle { color: #b8860b; font-weight: bold; margin-bottom: 20px; }
+        .section-box { margin-top: 15px; padding: 15px; background: #f9f9f9; border-radius: 12px; border: 1px solid #eee; transition: transform 0.3s; }
+        .section-box:hover { transform: translateY(-3px); }
         
-        .section-box { margin-top: 20px; padding: 20px; background: #f9f9f9; border-radius: 15px; border: 1px solid #eee; }
-        label { font-weight: bold; color: #2d5a27; display: block; margin-bottom: 10px; }
+        label { font-weight: bold; color: #2d5a27; display: block; margin-bottom: 8px; }
         select { 
             width: 100%; padding: 12px; border-radius: 10px; border: 2px solid #2d5a27;
             font-size: 1.05em; font-family: inherit; cursor: pointer; background: white;
         }
-        .player-area { margin-top: 15px; padding: 15px; background: #fff; border-radius: 10px; }
+
+        .player-area { margin-top: 15px; padding: 15px; background: #f0f4f2; border-radius: 10px; border: 1px dashed #2d5a27; }
         audio { width: 100%; height: 45px; }
         #statusText { color: #b8860b; font-weight: bold; margin-top: 10px; font-size: 0.9em; }
 
@@ -34,11 +47,14 @@
             display: inline-flex; align-items: center; gap: 10px;
             background-color: #25d366; color: white; padding: 12px 25px;
             border-radius: 30px; text-decoration: none; font-weight: bold; margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
         }
+
         .visitor-counter {
             margin-top: 25px; padding: 8px 15px; background: #2d5a27;
             color: white; display: inline-block; border-radius: 8px; font-size: 0.85em;
         }
+        
         footer { margin-top: 40px; font-size: 0.9em; color: #666; border-top: 1px solid #ddd; padding-top: 20px; }
         .dev-name { color: #2d5a27; font-weight: bold; }
     </style>
@@ -59,8 +75,8 @@
             <label>☀️ الأذكار اليومية:</label>
             <select id="azkarSelect" onchange="playMedia(this)">
                 <option value="">-- اختر من الأذكار --</option>
-                <option value="https://live.mp3quran.net/adkar/morning_adkar.mp3">أذكار الصباح</option>
-                <option value="https://live.mp3quran.net/adkar/evening_adkar.mp3">أذكار المساء</option>
+                <option value="https://files.freemuse.org/morning-azkar.mp3">أذكار الصباح</option>
+                <option value="https://files.freemuse.org/evening-azkar.mp3">أذكار المساء</option>
             </select>
         </div>
 
@@ -69,7 +85,7 @@
             <select id="duaSelect" onchange="playMedia(this)">
                 <option value="">-- اختر من القائمة --</option>
                 <option value="https://server12.mp3quran.net/maher/118.mp3">دعاء ختم القرآن</option>
-                <option value="https://download.tvquran.com/download/recitations/3/60.mp3">الرقية الشرعية</option>
+                <option value="https://ia800602.us.archive.org/20/items/rahmh_202601/roqia.mp3">الرقية الشرعية</option>
             </select>
         </div>
 
@@ -81,7 +97,6 @@
         </div>
 
         <a href="https://wa.me/967773363750" class="whatsapp-btn" target="_blank">تواصل معنا عبر واتساب</a>
-        
         <br>
         <div class="visitor-counter">
             عدد زوار المكتبة: 
@@ -89,13 +104,9 @@
         </div>
     </div>
 
-    <footer>
-        تم التطوير بواسطة المبرمج: <span class="dev-name">علي محمد بن فاتح</span> <br>
-        جميع الحقوق محفوظة &copy; 2026
-    </footer>
+    <footer>تم التطوير بواسطة المبرمج: <span class="dev-name">علي محمد بن فاتح</span></footer>
 
     <script>
-        // توليد قائمة السور
         const surahs = ["الفاتحة","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف","الأنفال","التوبة","يونس","هود","يوسف","الرعد","إبراهيم","الحجر","النحل","الإسراء","الكهف","مريم","طه","الأنبياء","الحج","المؤمنون","النور","الفرقان","الشعراء","النمل","القصص","العنكبوت","الروم","لقمان","السجدة","الأحزاب","سبأ","فاطر","يس","الصافات","ص","الزمر","غافر","فصلت","الشورى","الزخرف","الدخان","الجاثية","الأحقاف","محمد","الفتح","الحجرات","ق","الذاريات","الطور","النجم","القمر","الرحمن","الواقعة","الحديد","المجادلة","الحشر","الممتحنة","الصف","الجمعة","المنافقون","التغابن","الطلاق","التحريم","الملك","القلم","الحاقة","المعارج","نوح","الجن","المزمل","المدثر","القيامة","الإنسان","المرسلات","النبأ","النازعات","عبس","التكوير","الانفطار","المطففين","الانشقاق","البروج","الطارق","الأعلى","الغاشية","الفجر","البلد","الشمس","الليل","الضحى","الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات","القارعة","التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون","النصر","المسد","الإخلاص","الفلق","الناس"];
         const surahSelect = document.getElementById('surahSelect');
         surahs.forEach((name, index) => {
@@ -106,25 +117,19 @@
             surahSelect.appendChild(option);
         });
 
-        // وظيفة التشغيل الموحدة
         function playMedia(element) {
             const audio = document.getElementById('mainAudio');
             const source = document.getElementById('audioSource');
             const status = document.getElementById('statusText');
-
             if(element.value) {
                 source.src = element.value;
                 status.textContent = "🔊 جارٍ تشغيل: " + element.options[element.selectedIndex].text;
                 audio.load();
                 audio.play();
-                
-                // تصفير الاختيارات الأخرى
-                document.querySelectorAll('select').forEach(s => {
-                    if(s !== element) s.selectedIndex = 0;
-                });
+                document.querySelectorAll('select').forEach(s => { if(s !== element) s.selectedIndex = 0; });
             }
         }
     </script>
 </body>
-                </html>
-    
+            </html>
+        
