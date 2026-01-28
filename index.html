@@ -11,7 +11,7 @@
         .sub-title { color: #b8860b; font-weight: bold; margin-bottom: 20px; font-size: 1em; display: block; }
         .timer-box { background: #2d5a27; color: #ffeb3b; padding: 15px; border-radius: 15px; margin-bottom: 15px; border: 2px solid #b8860b; }
         .section { margin-bottom: 15px; padding: 12px; background: #f9f9f9; border-radius: 15px; border: 1px solid #ddd; }
-        .radio-section { background: #fff3e0; border: 1px solid #ff9800; } /* تمييز قسم الإذاعة */
+        .radio-section { background: #fff3e0; border: 1px solid #ff9800; }
         .row { display: flex; gap: 8px; align-items: center; margin-top: 5px; }
         select { flex: 1; padding: 12px; border-radius: 10px; border: 2px solid #2d5a27; font-size: 15px; background: white; }
         .dl-btn { background: #b8860b; color: white; border-radius: 10px; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1.2em; }
@@ -34,15 +34,16 @@
     </div>
 
     <div class="section radio-section">
-        <label>📻 إذاعات قرآن مباشر (24 ساعة):</label>
+        <label>📻 إذاعات قرآن مباشر:</label>
         <div class="row">
             <select id="radioSelect" onchange="runAudio(this)">
                 <option value="">-- اختر الإذاعة --</option>
-                <option value="https://backup.qurango.net/radio/tarabeel">إذاعة القراءات والتراتيل</option>
                 <option value="https://backup.qurango.net/radio/mix">إذاعة منوعات قرآنية</option>
                 <option value="https://backup.qurango.net/radio/maher">إذاعة ماهر المعيقلي</option>
-                <option value="https://backup.qurango.net/radio/basit">إذاعة عبد الباسط عبد الصمد</option>
-                <option value="https://backup.qurango.net/radio/s_gmd">إذاعة سعد الغامدي</option>
+                <option value="https://stream.radiojar.com/0u67n0q6v3quv">إذاعة القرآن الكريم من مكة المكرمة</option>
+                <option value="https://n0a.radiojar.com/8s5u8p3pzhquv">إذاعة القرآن الكريم من القاهرة</option>
+                <option value="https://quranshow.com:8000/quran">إذاعة القرآن الكريم من قطر</option>
+                <option value="https://stream.zeno.fm/f9u6m76q638uv">إذاعة نور عدن</option>
             </select>
         </div>
     </div>
@@ -138,7 +139,6 @@
             player.play();
             const dlBtn = el.parentElement.querySelector('.dl-btn');
             if(dlBtn) dlBtn.href = el.value;
-            // تصفير الخيارات الأخرى عند تشغيل واحد جديد
             document.querySelectorAll('select').forEach(s => { if(s !== el && s !== rSelect) s.selectedIndex = 0; });
         }
     }
