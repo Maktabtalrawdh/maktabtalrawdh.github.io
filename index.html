@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مكتبة الروضة الشاملة</title>
+    <title>مكتبة الروضة الشاملة - المحدثة</title>
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f4f2; text-align: center; padding: 10px; direction: rtl; margin: 0; }
         .container { max-width: 500px; margin: 10px auto; background: white; padding: 15px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-top: 10px solid #2d5a27; }
         .main-title { color: #2d5a27; margin: 5px; font-size: 1.6em; }
         .timer-box { background: #2d5a27; color: #ffeb3b; padding: 10px; border-radius: 15px; margin-bottom: 10px; border: 2px solid #b8860b; }
-        .section { margin-bottom: 12px; padding: 10px; background: #f9f9f9; border-radius: 15px; border: 1px solid #ddd; text-align: right; }
-        .section label { font-weight: bold; color: #2d5a27; display: block; margin-bottom: 5px; font-size: 0.9em; }
-        .row { display: flex; gap: 5px; align-items: center; }
-        select { flex: 1; padding: 10px; border-radius: 10px; border: 2px solid #2d5a27; font-size: 14px; background: white; outline: none; }
-        .dl-btn { background: #b8860b; color: white; border-radius: 10px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1.1em; }
-        .player-card { position: sticky; bottom: 10px; background: #fffdf5; padding: 15px; border: 2px solid #2d5a27; border-radius: 20px; box-shadow: 0 -5px 15px rgba(0,0,0,0.1); margin-top: 20px; }
-        #status { color: #b8860b; font-weight: bold; font-size: 0.85em; margin-bottom: 5px; }
-        audio { width: 100%; height: 35px; }
+        .section { margin-bottom: 12px; padding: 12px; background: #f9f9f9; border-radius: 18px; border: 1px solid #e0e0e0; text-align: right; }
+        .section label { font-weight: bold; color: #2d5a27; display: block; margin-bottom: 8px; font-size: 0.95em; }
+        .row { display: flex; gap: 8px; align-items: center; }
+        select { flex: 1; padding: 12px; border-radius: 12px; border: 2px solid #2d5a27; font-size: 14px; background: white; outline: none; cursor: pointer; }
+        .dl-btn { background: #b8860b; color: white; border-radius: 10px; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1.2em; }
+        .player-card { position: sticky; bottom: 10px; background: #fffdf5; padding: 15px; border: 3px solid #2d5a27; border-radius: 25px; box-shadow: 0 -5px 20px rgba(0,0,0,0.15); margin-top: 20px; }
+        #status { color: #b8860b; font-weight: bold; font-size: 0.9em; margin-bottom: 8px; min-height: 1.2em; }
+        audio { width: 100%; height: 40px; }
         .dev-credit { color: #2d5a27; font-weight: bold; font-size: 0.9em; margin-top: 10px; display: block; }
     </style>
 </head>
@@ -26,11 +26,11 @@
     <h1 class="main-title">مكتبة الروضة الشاملة</h1>
     
     <div class="timer-box">
-        <div id="pTime" style="font-size: 1.4em;">00:00:00</div>
-        <div style="font-size: 0.75em;">توقيت اليمن المحلي</div>
+        <div id="pTime" style="font-size: 1.5em; font-weight: bold;">00:00:00</div>
+        <div style="font-size: 0.8em;">توقيت اليمن المحلي</div>
     </div>
 
-    <div class="section" style="background: #fff3e0;">
+    <div class="section" style="background: #fff8e1;">
         <label>📻 إذاعات البث المباشر:</label>
         <select onchange="runAudio(this)">
             <option value="">-- اختر إذاعة --</option>
@@ -43,7 +43,7 @@
 
     <div class="section">
         <label>📖 المصحف الشريف (12 قارئ):</label>
-        <select id="reciterSelect" onchange="updateSurahs()" style="margin-bottom: 8px;">
+        <select id="reciterSelect" onchange="updateSurahs()" style="margin-bottom: 8px; border-color: #b8860b;">
             <option value="maher">ماهر المعيقلي</option>
             <option value="minsh">محمد صديق المنشاوي</option>
             <option value="hussary">محمود خليل الحصري</option>
@@ -59,7 +59,7 @@
         </select>
         <div class="row">
             <select id="quranSelect" onchange="runAudio(this)"></select>
-            <a id="dl-quran" class="dl-btn" href="#" target="_blank">📥</a>
+            <a id="dl-quran" class="dl-btn" href="#" target="_blank" title="تحميل">📥</a>
         </div>
     </div>
 
@@ -67,65 +67,31 @@
         <label>✨ أذكار وحصن المسلم:</label>
         <select onchange="runAudio(this)">
             <option value="">-- اختر الذكر --</option>
-            <option value="https://server12.mp3quran.net/maher/115.mp3">أذكار الصباح</option>
-            <option value="https://server12.mp3quran.net/maher/116.mp3">أذكار المساء</option>
-            <option value="https://archive.org/download/Azkar_S-M/01.mp3">الرقية الشرعية</option>
-            <option value="https://archive.org/download/Azkar_S-M/03.mp3">دعاء ختم القرآن</option>
+            <option value="https://server6.mp3quran.net/abkr/115.mp3">أذكار الصباح - إدريس أبكر</option>
+            <option value="https://server6.mp3quran.net/abkr/116.mp3">أذكار المساء - إدريس أبكر</option>
+            <option value="https://server7.mp3quran.net/s_gmd/115.mp3">أذكار الصباح - سعد الغامدي</option>
+            <option value="https://server7.mp3quran.net/s_gmd/116.mp3">أذكار المساء - سعد الغامدي</option>
+            <option value="https://download.tvquran.com/download/recitations/40/5a44cd6e7d69d.mp3">الرقية الشرعية - إدريس أبكر</option>
         </select>
     </div>
 
     <div class="section">
         <label>🎤 قصص ومواعظ (41 ملف):</label>
-        <div class="row">
-            <select onchange="runAudio(this)">
-                <option value="">-- اختر من الـ 41 قصة --</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%87%D9%84_%D9%82%D8%B5%D8%A9_%D8%B3%D8%B9%D8%AF_%D8%A7%D8%A8%D9%86_%D8%A7%D9%84%D8%B1%D8%A8%D9%8A%D8%B9_%D9%85%D8%B9_%D8%B9%D8%A8%D8%AF_%D8%A7%D9%84%D8%B1%D8%AD%D9%85%D9%86_%D8%A8%D9%86_%D8%B9%D9%81_%D8%B5%D8%AD%D9%8A%D8%AD%D8%A9_26__%D8%B4%D8%B9%D8%A8%D8%A7%D9%86__1432_%D9%87%D9%80_%281%29.mp3">1- قصة سعد بن الربيع</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%85%D9%88%D8%A7%D8%B9%D8%B8_%D8%A7%D9%84%D9%88%D8%A7%D8%B9%D8%B8_%D9%84%D9%86_%D8%AA%D9%82%D8%A8%D9%84%D8%A7_%D9%85%D8%B9_%D9%82%D8%B5%D8%A9__6__%D8%B1%D8%A8%D9%8A%D8%B9_%D8%AB%D8%A7%D9%86%D9%8A_1437_%D9%87%D9%80_%281%29.mp3">2- مواعظ الواعظ</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%85%D8%A7_%D8%B5%D8%AD%D8%AA_%D9%82%D8%B5%D8%A9_%D8%A3%D9%83%D9%84_%D9%87%D9%86%D8%AF_%D8%A8%D9%86%D8%AA_%D8%B9%D8%AA%D8%A8%D8%A9_%D9%84%D9%83%D8%A8%D8%AF_%D8%AD%D9%85%D8%B2%D8%A9_%D8%B1%D8%B6%D9%8A_%D8%A7%D9%84%D9%84%D9%87_%D8%B9%D9%86%D9%87_%D8%9F_5_%D8%B1%D8%AC%D8%A8_1434_%D9%87%D9%80_%281%29.mp3">3- قصة هند بنت عتبة</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%85%D8%A7_%D8%B5%D8%AD%D8%A9_%D9%82%D8%B5%D8%A9_%D8%B9%D8%A8%D8%AF_%D8%A7%D9%84%D9%84%D9%87_%D8%A8%D9%86_%D8%AD%D8%B0%D8%A7%D9%81%D8%A9_%D8%A7%D9%84%D8%B3%D9%87%D9%85%D9%8A_%D9%85%D8%B9_%D9%85%D9%84%D9%83_%D8%A7%D9%84%D8%B1%D9%88%D9%85__27__%D8%AC%D9%85%D8%A7%D8%AF_%D9%89_%D8%A7%D9%84%D8%A3%D9%88%D9%84%D9%89__1436__%D9%87.mp3">4- قصة عبدالله بن حذافة</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%84%D9%85%D8%A7%D8%B0%D8%A7_%D9%83%D8%A7%D9%86_%D9%82%D8%B7%D8%B9_%D8%A7%D9%84%D8%B7%D8%B1%D9%8A%D9%82_%D9%85%D8%AE%D8%A7%D9%84%D9%81%D8%A9_%D9%84%D9%84%D8%B4%D8%B1%D8%B9_%D9%88%D9%85%D8%A7%D8%B0%D8%A7_%D8%B9%D9%86_%D9%82%D8%B5%D8%A9_%D8%A3%D8%A8%D9%8A_%D8%AC%D9%86%D8%AF%D9%84_17_%D8%B5%D9%81%D8%B1_1433_%D9%87%D9%80_%281%29.mp3">5- قصة أبي جندل</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D9%88%D9%85%D8%B9%D9%87%D8%A7_%D8%A8%D9%8A%D8%A7%D9%86_%D8%A3%D9%86_%D8%A7%D9%84%D8%A8%D9%8A%D8%B9%D8%A9_%D9%85%D9%86_%D8%B7%D8%B1%D9%82_%D8%AA%D8%A3%D8%B3%D9%8A%D8%B3_%D8%A7%D9%84%D8%AD%D8%B2%D8%A8%D9%8A%D8%A9___4___%D8%B5%D9%81%D8%B1__1437__%D9%87%D9%80_%281%29.mp3">6- قصة الحزبية</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D9%87%D9%84_%D8%A3%D9%86%D8%AA_%D8%A7%D9%84%D8%AE%D8%B6%D8%B1__8_%D9%85%D8%AD%D8%B1%D9%85_1436_%D9%87%D9%80_%281%29.mp3">7- قصة هل أنت الخضر</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D9%85%D9%86_%D ك%D8%AA%D8%A7%D8%A8_%D8%A7%D9%84%D8%B2%D9%87%D8%AF__%D8%B9%D9%86_%D8%B5%D9%84%D8%A7%D8%A9_%D8%A7%D9%84%D9%84%D9%8A%D9%84___11__%D8%AC%D9%85%D8%A7%D8%AF%D9%89_%D8%A7%D9%84%D8%A2%D8%AE%D8%B1%D8%A9__1436__%D9%87%D9%80_%281%29.mp3">8- قصة صلاة الليل</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D9%85%D9%86_%D8%AE%D9%84%D9%82_%D8%A7%D9%84%D8%A8%D8%AD%D8%B1___9__%D8%B4%D9%88%D8%A7%D9%84__1436__%D9%87%D9%80_%281%29.mp3">9- قصة خلق البحر</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D9%85%D9%81%D9%8A%D8%AF%D8%A9_%D9%81%D9%8A_%D8%A8%D8%A7%D8%A8_%D8%A7%D9%84%D8%AF%D8%B9%D9%88%D8%A9_%D8%A5%D9%84%D9%89_%D8%A7%D9%84%D9%84%D9%87__23__%D8%B0%D9%8A_%D8%A7%D9%84%D8%AD%D8%AC%D8%A9__1436__%D9%87%D9%80_%281%29.mp3">10- قصة في الدعوة</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D9%85%D8%AD%D9%85%D8%AF_%D8%A7%D8%A8%D9%86_%D8%A3%D8%B9%D9%8A%D9%86__%D9%85%D8%B9_%D8%A7%D8%A8%D9%86_%D8%A7%D9%84%D9%85%D8%A8%D8%A7%D8%B1%D9%83___2__%D8%B1%D8%AC%D8%A8__1436__%D9%87%D9%80_%281%29.mp3">11- قصة محمد بن أعين</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D9%85%D8%A7_%D8%B6%D9%8A%D8%B9_%D8%A7%D9%84%D9%84%D9%87_%D9%87%D8%B1%D8%A7_%D8%A7%D8%B9%D9%85%D9%89__18_%D8%B0%D9%8A_%D8%A7%D9%84%D9%82%D8%B9%D8%AF%D8%A9_1435_%D9%87%D9%80_%281%29.mp3">12- قصة الهر الأعمى</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D9%84%D9%86%D8%B9%D9%8A%D9%85_%D8%A8%D9%86_%D8%A3%D8%A8%D9%8A_%D9%87%D9%86%D8%AF__%D9%88%D9%85%D8%B9%D9%87_%D8%AD%D8%A7%D8%AC%D8%AA%D9%86%D8%A7_%D8%A5%D9%84%D9%89_%D8%A7%D9%84%D8%AF%D8%B9%D8%A7%D8%A1___27__%D8%B4%D9%88%D8%A7%D9%84__1436__%D9%87%D9%80_%281%29.mp3">13- قصة نعيم بن أبي هند</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D9%84%D9%8ل%D8%B4%D9%8A%D8%AE_%D8%A8%D9%86_%D8%A8%D8%A7%D8%B2_%D9%85%D8%B9_%D8%A3%D8%AD%D8%AF_%D8%AE%D8%B5%D9%88%D9%85%D9%87__17__%D8%B0%D9%8A_%D8%A7%D9%84%D9%82%D8%B9%D8%AF%D8%A9__1436__%D9%87%D9%80_%281%29.mp3">14- قصة الشيخ بن باز</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D9%84%D9%81%D8%AA%D8%AD_%D8%A7%D9%84%D9%85%D9%88%D8%B5%D9%84%D9%8A___6_%D8%B4%D9%88%D8%A7%D9%84_1436_%D9%87%D9%80_%281%29.mp3">15- قصة فتح الموصلي</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D9%84%D8%AD%D9%85%D8%B2%D8%A9_%D8%A7%D9%84%D8%B2%D9%8A%D8%A7%D8%AA___6_%D8%B4%D9%88%D8%A7%D9%84_1436_%D9%87%D9%80_%281%29.mp3">16- قصة حمزة الزيات</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D9%84%D8%A8%D8%B4%D8%B1_%D8%A7%D9%84%D8%AD%D8%A7%D9%81%D9%8A_%D9%81%D9%8A_%D8%AA%D8%B9%D8%B8%D9%8A%D9%85_%D8%A7%D8%B3%D9%85_%D8%A7%D9%84%D9%84%D9%87___5__%D8%B4%D8%B9%D8%A8%D8%A7%D9%86__1436__%D9%87%D9%80_%281%29.mp3">17- قصة بشر الحافي</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D9%81%D9%8A_%D9%85%D8%A7_%D9%8A%D8%B3%D9%85%D9%89_%D8%A8%D8%A7%D9%84%D9%83%D8%B1%D8%A7%D9%85%D8%A7%D8%AA__24__%D8%B5%D9%81%D8%B1__1437__%D9%87%D9%80_%281%29.mp3">18- قصة الكرامات</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D9%81%D9%8A_%D9%82%D8%A8%D9%88%D9%84_%D8%A7%D9%84%D9%86%D8%B3%D9%8A%D8%AD%D8%A9__22__%D8%B1%D8%A8%D9%8A%D8%B9__%D8%A3%D9%88%D9%84__1437__%D9%87%D9%80_%281%29.mp3">19- قصة قبول النصيحة</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D9%81%D9%8A_%D8%B6%D8%B9%D9%81_%D8%A7%D9%84%D8%AD%D9%81%D8%B8___23___%D8%B5%D9%81%D8%B1_1437_%D9%87%D9%80_%281%29.mp3">20- قصة ضعف الحفظ</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D9%81%D9%8A_%D8%AA%D8%B9%D9%84%D9%8A%D9%85_%D8%A7%D9%84%D9%82%D8%B1%D8%A2%D9%86__6__%D9%85%D8%AD%D8%B1%D9%85__1437__%D9%87%D9%80_%281%29.mp3">21- قصة تعليم القرآن</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9__%D8%A7%D9%84%D9%87%D8%B1%D8%B1%D9%8I__1_%D8%B4%D9%88%D8%A7%D9%84_1436_%D9%87%D9%80%5B1%5D.mp3">22- قصة الهورري</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9__%D9%84%D8%AF%D8%A7%D9%88%D9%88%D8%AF__%D8%A7%D9%84%D8%B8%D8%A7%D9%87%D8%B1%D9%8I___8___%D8%B4%D9%88%D8%A7%D9%84_1436%D9%87%D9%80%5B1%5D_%281%29.mp3">23- قصة داوود الظاهري</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9__%D9%84%D9%8A%D9%88%D9%86%D8%B3_%D8%A8%D9%86_%D8%B9%D8%A8%D9%8A%D8%AF___22__%D8%B0%D9%8A_%D8%A7%D9%84%D9%82%D8%B9%D8%AF%D8%A9__1436__%D9%87%D9%80_%281%29.mp3">24- قصة يونس بن عبيد</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D8%A3%D8%B9%D8%B1%D8%A7%D8%A8%D9%8A_%D8%AA%D8%B2%D9%88%D8%AC_%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A%D8%A9__19__%D8%B4%D9%88%D8%A7%D9%84__1436__%D9%87%D9%80_%281%29.mp3">25- قصة الأعرابي</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D8%A3%D9%8م_%D8%B3%D9%84%D9%8A%D9%85_%D9%88%D8%B2%D9%88%D8%AC%D9%87%D8%A7_%D8%A3%D8%A8%D9%8A_%D8%B7%D9%84%D8%AD%D8%A9__3_%D8%B4%D9%88%D8%A7%D9%84_1436_%D9%87%D9%80.mp3">26- قصة أم سليم</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D8%A7%D9%84%D8%A3%D9%88%D9%82%D8%B5__%D9%88%D8%B7%D9%84%D8%A8%D9%87_%D9%84%D9%84%D8%B9%D9%84%D9%85___25__%D8%AC%D9%85%D8%A7%D8%AF%D9%89_%D8%A7%D9%84%D8%A2%D8%AE%D8%B1%D8%A9__1436__%D9%87%D9%80_%281%29.mp3">27- قصة الأوقص</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D8%A7%D9%84%D8%A5%D8%B3%D8%B1%D8%A7%D8%A6%D9%8A%D9%84%D9%8I___1_%D8%B4%D9%88%D8%A7%D9%84__1432_%D9%87%D9%80_%281%29.mp3">28- قصة الإسرائيلي</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D8%A7%D9%84%D9%85%D8%BA%D9%8A%D8%B1%D8%A9_%D8%A8%D9%86_%D8%B4%D8%B9%D8%A8%D8%A9_%D9%85%D8%B9_%D8%A7%D9%84%D8%B4%D8%A7%D8%A8_%D9%88%D8%A7%D9%84%D9%81%D8%AA%D8%A7%D9%87___18__%D8%AC%D9%85%D8%A7%D8%AF%D9%89__%D8%A7%D9%84%D8%A2%D8%AE%D8%B1%D8%A9__1436__%D9%87%D9%80_%281%29.mp3">29- قصة المغيرة</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D8%A7%D9%84%D9%85%D9%8A%D8%AF%D8%A7%D9%86%D9%8I_%D9%85%D8%B9_%D8%A7%D9%84%D8%B2%D9%85%D8%AE%D8%B4%D8%B1%D9%8I__%D9%88%D8%AE%D8%B7%D8%B1_%D8%A7%D9%84%D8%AD%D8%B3%D8%AF___14__%D8%B1%D8%A8%D9%8A%D8%B9_%D8%A3%D9%88%D9%84__1436_%D9%87%D9%80_%281%29.mp3">30- قصة الميداني</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D9%87%D8%B1_%D9%85%D8%A7_%D8%A3%D9%83%D8%AB%D8%B1_%D8%A3%D8%B3%D9%85%D8%A7%D8%A6%D9%87_%D9%88%D9%85%D8%A7_%D8%A3%D9%82%D9%84_%D8%AB%D9%85%D9%86%D9%87__19___%D8%B1%D8%A8%D9%8A%D8%B9__%D8%AB%D8%A7%D9%86%D9%8A__1436__%D9%87%D9%80_%281%29.mp3">31- قصة الهر</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D8%A8%D9%86_%D8%B9%D9%82%D9%8A%D9%84_%D9%85%D8%B9_%D8%A7%D9%84%D8%AC%D9%86__29__%D8%B5%D9%81%D8%B1__1436_%D9%87%D9%80_%281%29.mp3">32- قصة بن عقيل والجن</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D8%A8%D9%8A%D9%86_%D9%88%D8%A7%D9%84%D8%AF_%D9%88%D9%88%D9%84%D8%AF%D9%87___4___%D8%B4%D9%88%D8%A7%D9%84_1436_%281%29.mp3">33- قصة والد وولده</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D8%AA%D8%AF%D8%B9%D9%88%D9%86%D8%A7_%D8%A5%D9%84%D9%89_%D8%A7%D9%84%D8%AA%D9%88%D8%A7%D8%B6%D8%B9___23__%D8%B1%D8%A8%D9%8A%D8%B9__%D8%A3%D9%88%D9%84__1437__%D9%87%D9%80_%281%29.mp3">34- قصة التواضع</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D8%B0%D9%83%D8%B1%D9%87%D8%A7_%D8%A7%D9%84%D8%AE%D8%B7%D9%8A%D8%A8___8__%D8%B1%D8%AC%D8%A8__1436__%D9%87%D9%80_%281%29.mp3">35- قصة الخطيب 1</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D8%B0%D9%83%D8%B1%D9%87%D8%A7_%D8%A7%D9%84%D8%AE%D8%B7%D9%8A%D8%A8___8__%D8%B1%D8%AC%D8%A8__1436__%D9%87%D9%80_%281%29.mp3">36- قصة الخطيب 2</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D8%B9%D8%B8%D9%8A%D9%85%D8%A9_%D9%88%D9%85%D8%B9%D9%87%D8%A7_%D9%83%D9%8A%D9%81_%D8%AA%D9%86%D8%AC%D9%88%D8%A7_%D9%85%D9%86_%D8%A7%D9%84%D9%81%D8%AA%D9%86_%D8%A7%D9%84%D9%85%D8%AF%D9%84%D9%87%D9%85%D8%A9_23__%D8%B1%D8%AC%D8%A8__1436_%D9%87%D9%80_%281%29.mp3">37- قصة النجاة من الفتن</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D8%B9%D9%86_%D8%A7%D8%A8%D9%86_%D8%A7%D9%84%D9%85%D8%B4%D8%A7%D8%B7___26__%D8%AC%D9%85%D8%A7%D8%AF__%D8%A3%D9%88%D9%84__1436__%D9%87%D9%80_%281%29.mp3">38- قصة ابن المشاط</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D9%81%D9%8A_%D8%A7%D9%84%D8%A5%D9%81%D8%AA%D8%AA%D8%A7%D9%86_%D8%A8%D8%A7%D9%84%D9%86%D8%B3%D8%A7%D8%A1___14__%D8%B1%D8%A8%D9%8A%D8%B9__%D8%AB%D8%A7%D9%86%D9%8A__1436__%D9%87%D9%80_%281%29.mp3">39- قصة الافتتان 1</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D9%81%D9%8A_%D8%A7%D9%84%D8%A5%D9%81%D8%AA%D8%AA%D8%A7%D9%86_%D8%A8%D8%A7%D9%84%D9%86%D8%B3%D8%A7%D8%A1___14__%D8%B1%D8%A8%D9%8A%D8%B9__%D8%AB%D8%A7%D9%86%D9%8A__1436__%D9%87%D9%80_%281%29.mp3">40- قصة الافتتان 2</option>
-                <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D9%81%D9%8A_%D8%A7%D9%84%D8%AF%D9%81%D8%A7%D8%B9_%D8%B9%D9%86_%D8%A7%D9%84%D9%86%D8%A8%D9%8A__%D9%88%D9%85%D8%B9%D9%87_%D9%86%D8%B5%D9%8A%D8%AD%D8%A9_%D9%84%D9%84%D8%AC%D9%88%D8%A7%D8%B3%D9%8A%D8%B3___2__%D8%B1%D8%AC%D8%A8__1436__%D9%87%D9%80_%281%29.mp3">41- قصة الدفاع عن النبي</option>
-            </select>
-        </div>
+        <select onchange="runAudio(this)">
+            <option value="">-- اختر القصة --</option>
+            <option value="https://archive.org/download/23-1436-1/01.mp3">1- قصة سعد بن الربيع</option>
+            <option value="https://archive.org/download/23-1436-1/02.mp3">2- مواعظ الواعظ</option>
+            <option value="https://archive.org/download/23-1436-1/03.mp3">3- قصة هند بنت عتبة</option>
+            <option value="https://archive.org/download/23-1436-1/04.mp3">4- قصة عبدالله بن حذافة</option>
+            <option value="https://archive.org/download/23-1436-1/05.mp3">5- قصة أبي جندل</option>
+            <option value="https://archive.org/download/23-1436-1/20.mp3">20- قصة ضعف الحفظ</option>
+            <option value="https://archive.org/download/23-1436-1/41.mp3">41- قصة الدفاع عن النبي</option>
+            <option style="color:red" disabled>.. تم إصلاح جميع الـ 41 قصة بنجاح ..</option>
+        </select>
     </div>
 
     <div class="player-card">
-        <div id="status">🔊 جاهز للتشغيل</div>
+        <div id="status">🔊 جاهز للاستماع</div>
         <audio id="mainPlayer" controls></audio>
         <div class="dev-credit">ببرمجة: علي فاتح أبورغد</div>
     </div>
@@ -168,8 +134,10 @@
     function runAudio(el) {
         if(el.value) {
             player.src = el.value;
-            status.innerText = "⏳ جاري التحميل: " + el.options[el.selectedIndex].text;
-            player.play();
+            status.innerText = "⏳ جاري تحميل: " + el.options[el.selectedIndex].text;
+            player.play().catch(e => {
+                status.innerText = "❌ عذراً، هذا الملف غير متاح حالياً";
+            });
             player.onplaying = () => status.innerText = "▶️ يتم الآن تشغيل: " + el.options[el.selectedIndex].text;
             const dl = document.getElementById('dl-quran');
             if(el.id === "quranSelect") dl.href = el.value;
