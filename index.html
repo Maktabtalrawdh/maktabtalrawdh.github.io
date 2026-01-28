@@ -13,13 +13,12 @@
         .section { margin-bottom: 15px; padding: 12px; background: #f9f9f9; border-radius: 15px; border: 1px solid #ddd; }
         .radio-section { background: #fff3e0; border: 1px solid #ff9800; }
         .row { display: flex; gap: 8px; align-items: center; margin-top: 5px; }
-        select { flex: 1; padding: 12px; border-radius: 10px; border: 2px solid #2d5a27; font-size: 15px; background: white; }
+        select { flex: 1; padding: 12px; border-radius: 10px; border: 2px solid #2d5a27; font-size: 15px; background: white; cursor: pointer; }
         .dl-btn { background: #b8860b; color: white; border-radius: 10px; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 1.2em; }
         .player-card { margin-top: 20px; padding: 15px; border: 2px dashed #2d5a27; border-radius: 15px; background: #fffdf5; }
         audio { width: 100%; margin-top: 10px; }
         .wa-link { display: inline-block; background: #25d366; color: white; padding: 12px 25px; border-radius: 30px; text-decoration: none; font-weight: bold; margin-top: 20px; }
         .dev-credit { color: #2d5a27; font-weight: bold; font-size: 1.1em; margin-top: 10px; }
-        .charity-note { margin-top: 30px; padding: 15px; font-size: 0.9em; color: #555; border-top: 1px solid #eee; }
     </style>
 </head>
 <body>
@@ -29,7 +28,7 @@
     <span class="sub-title">(المصحف - إذاعات - أذكار - محاضرات)</span>
 
     <div class="timer-box">
-        <div id="pName">مواقيت الصلاة</div>
+        <div id="pName">الوقت الحالي</div>
         <div id="pTime" style="font-size: 1.5em;">00:00:00</div>
     </div>
 
@@ -41,6 +40,23 @@
                 <option value="https://radioplus.sba.sa/live/4">إذاعة القرآن الكريم (المملكة)</option>
                 <option value="https://radioplus.sba.sa/live/1">إذاعة نداء الإسلام</option>
             </select>
+        </div>
+    </div>
+
+    <div class="section">
+        <label>🎤 محاضرات وقصص (42 ملف صوتي):</label>
+        <div class="row">
+            <select id="lectureSelect" onchange="runAudio(this)">
+                <option value="">-- اختر المحاضرة للتشغيل --</option>
+                <script>
+                    for(let i=1; i<=42; i++) {
+                        let num = i.toString().padStart(2, '0');
+                        let url = `https://archive.org/download/23-1436-1/${num}.mp3`;
+                        document.write(`<option value="${url}">المقطع الصوتي رقم ${num}</option>`);
+                    }
+                </script>
+            </select>
+            <a id="dl-lecture" class="dl-btn" href="#" target="_blank" title="تحميل">📥</a>
         </div>
     </div>
 
@@ -67,83 +83,13 @@
         </div>
     </div>
 
-    <div class="section">
-        <label>🎤 قصص ومواعظ منوعة (42 ملف):</label>
-        <div class="row">
-            <select id="lectureSelect" onchange="runAudio(this)">
-                <option value="">-- اختر المحاضرة --</option>
-                <option value="https://archive.org/download/23-1436-1/01.mp3">محاضرة 01</option>
-                <option value="https://archive.org/download/23-1436-1/02.mp3">محاضرة 02</option>
-                <option value="https://archive.org/download/23-1436-1/03.mp3">محاضرة 03</option>
-                <option value="https://archive.org/download/23-1436-1/04.mp3">محاضرة 04</option>
-                <option value="https://archive.org/download/23-1436-1/05.mp3">محاضرة 05</option>
-                <option value="https://archive.org/download/23-1436-1/06.mp3">محاضرة 06</option>
-                <option value="https://archive.org/download/23-1436-1/07.mp3">محاضرة 07</option>
-                <option value="https://archive.org/download/23-1436-1/08.mp3">محاضرة 08</option>
-                <option value="https://archive.org/download/23-1436-1/09.mp3">محاضرة 09</option>
-                <option value="https://archive.org/download/23-1436-1/10.mp3">محاضرة 10</option>
-                <option value="https://archive.org/download/23-1436-1/11.mp3">محاضرة 11</option>
-                <option value="https://archive.org/download/23-1436-1/12.mp3">محاضرة 12</option>
-                <option value="https://archive.org/download/23-1436-1/13.mp3">محاضرة 13</option>
-                <option value="https://archive.org/download/23-1436-1/14.mp3">محاضرة 14</option>
-                <option value="https://archive.org/download/23-1436-1/15.mp3">محاضرة 15</option>
-                <option value="https://archive.org/download/23-1436-1/16.mp3">محاضرة 16</option>
-                <option value="https://archive.org/download/23-1436-1/17.mp3">محاضرة 17</option>
-                <option value="https://archive.org/download/23-1436-1/18.mp3">محاضرة 18</option>
-                <option value="https://archive.org/download/23-1436-1/19.mp3">محاضرة 19</option>
-                <option value="https://archive.org/download/23-1436-1/20.mp3">محاضرة 20</option>
-                <option value="https://archive.org/download/23-1436-1/21.mp3">محاضرة 21</option>
-                <option value="https://archive.org/download/23-1436-1/22.mp3">محاضرة 22</option>
-                <option value="https://archive.org/download/23-1436-1/23.mp3">محاضرة 23</option>
-                <option value="https://archive.org/download/23-1436-1/24.mp3">محاضرة 24</option>
-                <option value="https://archive.org/download/23-1436-1/25.mp3">محاضرة 25</option>
-                <option value="https://archive.org/download/23-1436-1/26.mp3">محاضرة 26</option>
-                <option value="https://archive.org/download/23-1436-1/27.mp3">محاضرة 27</option>
-                <option value="https://archive.org/download/23-1436-1/28.mp3">محاضرة 28</option>
-                <option value="https://archive.org/download/23-1436-1/29.mp3">محاضرة 29</option>
-                <option value="https://archive.org/download/23-1436-1/30.mp3">محاضرة 30</option>
-                <option value="https://archive.org/download/23-1436-1/31.mp3">محاضرة 31</option>
-                <option value="https://archive.org/download/23-1436-1/32.mp3">محاضرة 32</option>
-                <option value="https://archive.org/download/23-1436-1/33.mp3">محاضرة 33</option>
-                <option value="https://archive.org/download/23-1436-1/34.mp3">محاضرة 34</option>
-                <option value="https://archive.org/download/23-1436-1/35.mp3">محاضرة 35</option>
-                <option value="https://archive.org/download/23-1436-1/36.mp3">محاضرة 36</option>
-                <option value="https://archive.org/download/23-1436-1/37.mp3">محاضرة 37</option>
-                <option value="https://archive.org/download/23-1436-1/38.mp3">محاضرة 38</option>
-                <option value="https://archive.org/download/23-1436-1/39.mp3">محاضرة 39</option>
-                <option value="https://archive.org/download/23-1436-1/40.mp3">محاضرة 40</option>
-                <option value="https://archive.org/download/23-1436-1/41.mp3">محاضرة 41</option>
-                <option value="https://archive.org/download/23-1436-1/42.mp3">محاضرة 42</option>
-            </select>
-            <a id="dl-lecture" class="dl-btn" href="#" target="_blank">📥</a>
-        </div>
-    </div>
-
-    <div class="section">
-        <label>☀️ الأذكار والرقية:</label>
-        <div class="row">
-            <select id="azkarSelect" onchange="runAudio(this)">
-                <option value="">-- اختر من القائمة --</option>
-                <option value="https://ia902808.us.archive.org/31/items/athkar-idrees-abkar/Athkar%20Idrees%20Abkar.mp3">أذكار الصباح والمساء - إدريس ابكر</option>
-                <option value="https://ia902808.us.archive.org/31/items/athkar-idrees-abkar/athkar_05.mp3">أذكار الصباح - فارس عباد</option>
-                <option value="https://ia902808.us.archive.org/31/items/athkar-idrees-abkar/athkar_06.mp3">أذكار المساء - فارس عباد</option>
-                <option value="https://ia800602.us.archive.org/20/items/rahmh_202601/roqia.mp3">الرقية الشرعية الكاملة</option>
-            </select>
-            <a id="dl-azkar" class="dl-btn" href="#" target="_blank">📥</a>
-        </div>
-    </div>
-
     <div class="player-card">
         <div id="status" style="color:#b8860b; font-weight:bold; font-size:0.9em;">🔊 جاهز للتشغيل</div>
-        <audio id="mainPlayer" controls></audio>
+        <audio id="mainPlayer" controls preload="metadata"></audio>
     </div>
 
     <a href="https://wa.me/967773363750" class="wa-link">للتواصل مع المطور</a>
     <div class="dev-credit">مبرمج الموقع علي فاتح ابورغد</div>
-
-    <div class="charity-note">
-        الصفحة صدقة جارية غير ربحية ساعد في نشرها ولك الأجر والثواب إن شاء الله
-    </div>
 </div>
 
 <script>
@@ -182,11 +128,16 @@
 
     function runAudio(el) {
         if(el.value) {
+            status.innerText = "⌛ جاري التحميل...";
             player.src = el.value;
-            status.innerText = "⌛ جاري التشغيل: " + el.options[el.selectedIndex].text;
-            player.play();
+            player.play().then(() => {
+                status.innerText = "🔊 تشغيل: " + el.options[el.selectedIndex].text;
+            }).catch(e => {
+                status.innerText = "❌ تعذر التشغيل، تأكد من اتصال الإنترنت";
+            });
             const dlBtn = el.parentElement.querySelector('.dl-btn');
             if(dlBtn) dlBtn.href = el.value;
+            // تصفير القوائم الأخرى
             document.querySelectorAll('select').forEach(s => { if(s !== el && s !== rSelect) s.selectedIndex = 0; });
         }
     }
