@@ -1,190 +1,76 @@
-٢<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مكتبة الروضة الشاملة</title>
+    <title>تطبيق إسلامي شامل</title>
     <style>
-        /* التعديل الجديد ليتناسب مع الصورة المرفقة */
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background: linear-gradient(135deg, #240b36 0%, #000000 100%); /* خلفية ليلية متدرجة */
-            color: #fff;
-            text-align: center; 
-            padding: 10px; 
-            direction: rtl; 
-            margin: 0; 
-        }
-        .container { 
-            max-width: 500px; 
-            margin: 10px auto; 
-            background: rgba(255, 255, 255, 0.05); /* خلفية شفافة */
-            padding: 15px; 
-            border-radius: 25px; 
-            box-shadow: 0 0 20px rgba(0,0,0,0.5); 
-            border: 1px solid rgba(255, 215, 0, 0.3); /* إطار ذهبي خفيف */
-        }
-        .main-title { 
-            color: #ffd700; /* لون ذهبي */
-            margin: 15px 0; 
-            font-size: 2em; 
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); /* توهج للنص */
-        }
-        .timer-box { 
-            background: rgba(0, 0, 0, 0.6); 
-            color: #fff; 
-            padding: 15px; 
-            border-radius: 20px; 
-            margin-bottom: 20px; 
-            border: 1px solid #ffd700;
-            box-shadow: inset 0 0 10px rgba(255, 215, 0, 0.2);
-        }
-        .section { 
-            margin-bottom: 15px; 
-            padding: 15px; 
-            background: linear-gradient(to bottom, #1e3c7200, #2a52981a);
-            border-radius: 18px; 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            text-align: right; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-        .section label { 
-            font-weight: bold; 
-            color: #ffd700; /* عناوين ذهبية */
-            display: block; 
-            margin-bottom: 10px; 
-            font-size: 1.1em; 
-        }
-        select { 
-            width: 100%; 
-            padding: 12px; 
-            border-radius: 12px; 
-            border: 1px solid #ffd700; 
-            font-size: 15px; 
-            background: #fdfdfd; 
-            color: #333; /* النص داخل الاختيار أسود لسهولة القراءة */
-            outline: none; 
-            cursor: pointer; 
-            font-weight: bold;
-        }
-        .player-card { 
-            position: sticky; 
-            bottom: 10px; 
-            background: rgba(255, 255, 255, 0.95); 
-            padding: 15px; 
-            border: 2px solid #ffd700; 
-            border-radius: 25px; 
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.5); 
-            margin-top: 20px; 
-        }
-        #status { 
-            color: #240b36; 
-            font-weight: bold; 
-            font-size: 1em; 
-            margin-bottom: 8px; 
-            min-height: 1.2em; 
-        }
-        audio { width: 100%; height: 45px; border-radius: 10px; }
-        .dev-credit { 
-            color: #240b36; 
-            font-weight: bold; 
-            font-size: 0.9em; 
-            margin-top: 10px; 
-            display: block; 
-        }
+        /* تنسيقات أساسية لضمان جمالية المظهر */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; margin: 0; padding: 20px; text-align: right; }
+        .container { max-width: 800px; margin: auto; background: #fff; padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        select, button { width: 100%; padding: 12px; margin: 8px 0; border-radius: 8px; border: 1px solid #ddd; font-size: 16px; outline: none; }
+        label { font-weight: bold; color: #2c3e50; margin-top: 15px; display: block; }
+        
+        /* تنسيق قسم الأذكار الجديد */
+        .athkar-buttons { display: flex; gap: 10px; margin-bottom: 15px; }
+        .athkar-btn { flex: 1; cursor: pointer; background: #3498db; color: white; border: none; transition: 0.3s; }
+        .athkar-btn:hover { background: #2980b9; }
+        .athkar-card { background: #e8f6f3; border-right: 5px solid #2ecc71; padding: 15px; margin-bottom: 10px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .dhikr-text { font-size: 18px; color: #16a085; line-height: 1.6; margin: 0 0 10px 0; }
+        .counter-btn { background: #f1c40f; color: #333; font-weight: bold; width: auto; min-width: 120px; }
+        
+        /* تنسيق المشغل */
+        .player-card { background: #2c3e50; color: white; padding: 15px; border-radius: 10px; margin-top: 30px; text-align: center; }
+        audio { width: 100%; margin-top: 10px; }
+        .dev-credit { margin-top: 10px; font-size: 12px; color: #bdc3c7; }
+        #status { font-size: 14px; margin-bottom: 5px; color: #f39c12; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1 class="main-title">🕋 مكتبة الروضة الشاملة</h1>
     
-    <div class="timer-box">
-        <div id="pTime" style="font-size: 1.8em; font-weight: bold; color: #ffd700;">00:00:00</div>
-        <div style="font-size: 0.9em; opacity: 0.8;">توقيت مكة المكرمة</div>
+    <div class="section">
+        <label>📖 القرآن الكريم (اختر القارئ ثم السورة):</label>
+        <select id="reciterSelect" onchange="updateSurahs()">
+            </select>
+        <select id="quranSelect" onchange="runAudio(this)">
+            <option value="">-- اختر السورة --</option>
+        </select>
     </div>
 
     <div class="section">
-        <label>📻 إذاعات البث المباشر:</label>
-        <select onchange="runAudio(this)">
-            <option value="">-- اختر إذاعة --</option>
-            <option value="https://qurango.net/radio/saudi">إذاعة القرآن الكريم - السعودية</option>
-            <option value="https://qurango.net/radio/tarateel">إذاعة تراتيل قصيرة</option>
-            <option value="https://qurango.net/radio/maher_al_muaiqly">إذاعة ماهر المعيقلي</option>
-            <option value="https://daralhdeth.com/live">إذاعة السلفيه من الضالع</option>
-        </select>
-  
-</div>
-
-    <div class="section">
-        <label>📖 المصحف الشريف:</label>
-        <select id="reciterSelect" onchange="updateSurahs()" style="margin-bottom: 10px;">
-            <option value="maher">ماهر المعيقلي</option>
-            <option value="gham">سعد الغامدي</option>
-            <option value="abkr">إدريس أبكر</option>
-        </select>
-        <select id="quranSelect" onchange="runAudio(this)"></select>
-    </div>
-
-<div class="section">
-        <label>🎤 قصص الانبياء الشيخ عثمان الخميس:</label>
-        <select onchange="runAudio(this)">
-            <option value="">-- اختر القصة --</option>
-            <option value="https://archive.org/download/Qsusu_AlNbeya/Qsusu_alnbeya01.mp3">المقدمة عثمان الخميس</option>
-            <option value="https://archive.org/download/Qsusu_AlNbeya2/Qsusu_alnbeya02.mp3">الفرق بين النبي والرسول </option>
-       <option value="https://archive.org/download/samir9206/01.mp3">قصة أدم علية السلام</option>
-<option value="https://archive.org/download/samir9206/02.mp3">قصة نوح وهود عليهما السلام</option>
-<option
-value="https://archive.org/download/samir9206/03.mp3"> قصة صالح علية السلام</option>
-<option value="https://archive.org/download/samir9206/04.mp3"> قصة ابراهيم علية السلام</option>
-<option value="https://archive.org/download/samir9206/06.mp3">قصة اسحاق ويعقوب ويوسف عليهم السلام</option>
-<option value="https://archive.org/download/samir9206/07.mp3">تابع قصة يوسف2 علية السلام</option>
-<option value="https://archive.org/download/samir9206/08.mp3">قصة لوط وشعيب عليهما السلام</option>
-<option value="https://archive.org/download/samir9206/09.mp3">قصة ايوب وداؤد عليهما السلام</option>
-<option value="https://archive.org/download/samir9206/10.mp3">قصة سليمان علية السلام</option>
-<option value="https://archive.org/download/samir9206/11.mp3">قصة موسى1 علية السلام</option>
-<option value="https://archive.org/download/samir9206/12.mp3">قصة  موسى2 علية السلام</option>
-<option value="https://archive.org/download/samir9206/13.mp3">قصة موسى3 علية السلام</option>
-<option value="https://archive.org/download/samir9206/14.mp3">قصة يونس وزكريا ويحيى عليهم السلام</option>
-<option value="https://archive.org/download/samir9206/15.mp3">قصة عيسى علية السلام</option>
-        <option value="https://archive.org/download/Qsusu_AlNbeya3/Qsusu_alnbeya03.mp3">اسرار دراسة قصص الانبياء </option>
-        </select>
-    </div>
-
         <label>✨ السيرة النبوية الشيخ سعيد بن مسفر:</label>
         <select onchange="runAudio(this)">
             <option value="">-- اختر المقطع --</option>
             <option value="https://archive.org/download/Said_bin_Misfer_Qahtani-Ta2amolat.fi.Seera-Up-By-MusleM/01.mp3">لماذا ندرس السيرة النبوية</option>
             <option value="https://archive.org/download/Said_bin_Misfer_Qahtani-Ta2amolat.fi.Seera-Up-By-MusleM/02.mp3">تاريخ بنا الكعبة </option>
-       <option value="https://archive.org/download/samir9206/01.mp3">بعثة النبي صلى الله علية وسلم</option>
-<option value="https://archive.org/download/Said_bin_Misfer_Qahtani-Ta2amolat.fi.Seera-Up-By-MusleM/04.mp3">زوجات النبي صلى الله علية وسلم</option>
-<option
-value="https://archive.org/download/Said_bin_Misfer_Qahtani-Ta2amolat.fi.Seera-Up-By-MusleM/05.mp3"> بدء الوحي ومراتبة</option>
-<option value="https://archive.org/download/Said_bin_Misfer_Qahtani-Ta2amolat.fi.Seera-Up-By-MusleM/06.mp3"> معالم الدعوة الى الله عزوجل</option>
-<option value="https://archive.org/download/Said_bin_Misfer_Qahtani-Ta2amolat.fi.Seera-Up-By-MusleM/07.mp3">مراحل الدعوة في حياة النبي</option>
-<option value="https://archive.org/download/Said_bin_Misfer_Qahtani-Ta2amolat.fi.Seera-Up-By-MusleM/08.mp3">اساليب المشركين في دعوة النبي</option>
-<option value="https://archive.org/download/Said_bin_Misfer_Qahtani-Ta2amolat.fi.Seera-Up-By-MusleM/09.mp3">الاذاء والأبتلاء في حياة الصحابة</option>
-<option value="https://archive.org/download/Said_bin_Misfer_Qahtani-Ta2amolat.fi.Seera-Up-By-MusleM/10.mp3">الهجرة الى الحبشة</option>
-<option value="https://archive.org/download/Said_bin_Misfer_Qahtani-Ta2amolat.fi.Seera-Up-By-MusleM/11.mp3">حصار النبي صلى الله علية وسلم في الشعب</option>
-<option value="https://archive.org/download/Said_bin_Misfer_Qahtani-Ta2amolat.fi.Seera-Up-By-MusleM/12.mp3">الأسراء والمعراج</option>
-<option value="https://archive.org/download/Said_bin_Misfer_Qahtani-Ta2amolat.fi.Seera-Up-By-MusleM/13.mp3">وقفه مع سورة الحج-بيعة الرضوان</option>
-<option value="https://archive.org/download/Said_bin_Misfer_Qahtani-Ta2amolat.fi.Seera-Up-By-MusleM/14.mp3">احداث هجرة النبي صلى الله علية وسلم</option>
-<option value="https://archive.org/download/Said_bin_Misfer_Qahtani-Ta2amolat.fi.Seera-Up-By-MusleM/15.mp3">في الطريق الى المدينة المنورة</option>
-<option value="https://archive.org/download/Said_bin_Misfer_Qahtani-Ta2amolat.fi.Seera-Up-By-MusleM/16.mp3">مجتمع المدينة الجديد</option>
-        <option value="https://archive.org/download/Said_bin_Misfer_Qahtani-Ta2amolat.fi.Seera-Up-By-MusleM/17.mp3">قيام دولة الأسلام الحنيف </option>
-<option value="https://archive.org/download/Said_bin_Misfer_Qahtani-Ta2amolat.fi.Seera-Up-By-MusleM/16.mp3">القضاء في عهد النبي صلى الله علية وسلم</option>
-        <option
+            <option value="https://archive.org/download/samir9206/01.mp3">بعثة النبي صلى الله علية وسلم</option>
+            <option value="https://archive.org/download/Said_bin_Misfer_Qahtani-Ta2amolat.fi.Seera-Up-By-MusleM/04.mp3">زوجات النبي صلى الله علية وسلم</option>
+            <option value="https://archive.org/download/Said_bin_Misfer_Qahtani-Ta2amolat.fi.Seera-Up-By-MusleM/05.mp3"> بدء الوحي ومراتبة</option>
+            <option value="https://archive.org/download/Said_bin_Misfer_Qahtani-Ta2amolat.fi.Seera-Up-By-MusleM/06.mp3"> معالم الدعوة الى الله عزوجل</option>
+            <option value="https://archive.org/download/Said_bin_Misfer_Qahtani-Ta2amolat.fi.Seera-Up-By-MusleM/07.mp3">مراحل الدعوة في حياة النبي</option>
+            <option value="https://archive.org/download/Said_bin_Misfer_Qahtani-Ta2amolat.fi.Seera-Up-By-MusleM/08.mp3">اساليب المشركين في دعوة النبي</option>
+            <option value="https://archive.org/download/Said_bin_Misfer_Qahtani-Ta2amolat.fi.Seera-Up-By-MusleM/09.mp3">الاذاء والأبتلاء في حياة الصحابة</option>
+            <option value="https://archive.org/download/Said_bin_Misfer_Qahtani-Ta2amolat.fi.Seera-Up-By-MusleM/10.mp3">الهجرة الى الحبشة</option>
+            <option value="https://archive.org/download/Said_bin_Misfer_Qahtani-Ta2amolat.fi.Seera-Up-By-MusleM/11.mp3">حصار النبي صلى الله علية وسلم في الشعب</option>
+            <option value="https://archive.org/download/Said_bin_Misfer_Qahtani-Ta2amolat.fi.Seera-Up-By-MusleM/12.mp3">الأسراء والمعراج</option>
+            <option value="https://archive.org/download/Said_bin_Misfer_Qahtani-Ta2amolat.fi.Seera-Up-By-MusleM/13.mp3">وقفه مع سورة الحج-بيعة الرضوان</option>
+            <option value="https://archive.org/download/Said_bin_Misfer_Qahtani-Ta2amolat.fi.Seera-Up-By-MusleM/14.mp3">احداث هجرة النبي صلى الله علية وسلم</option>
+            <option value="https://archive.org/download/Said_bin_Misfer_Qahtani-Ta2amolat.fi.Seera-Up-By-MusleM/15.mp3">في الطريق الى المدينة المنورة</option>
+            <option value="https://archive.org/download/Said_bin_Misfer_Qahtani-Ta2amolat.fi.Seera-Up-By-MusleM/16.mp3">مجتمع المدينة الجديد</option>
+            <option value="https://archive.org/download/Said_bin_Misfer_Qahtani-Ta2amolat.fi.Seera-Up-By-MusleM/17.mp3">قيام دولة الأسلام الحنيف </option>
+            <option value="https://archive.org/download/Said_bin_Misfer_Qahtani-Ta2amolat.fi.Seera-Up-By-MusleM/16.mp3">القضاء في عهد النبي صلى الله علية وسلم</option>
         </select>
-</div>
+    </div>
     
-<div class="section">
-        <label>🎤 الاذكار الصباح والمساء:</label>
-        <select onchange="runAudio(this)">
-            <option value="">-- اختر المقطع --</option>
-            <option value="https://archive.org/download/athkar-idrees-abkar/Athkar%20Idrees%20Abkar.mp3">أذكار الصباح والمساء - إدريس أبكر</option>
-            <option value="https://archive.org/download/athkar-idrees-abkar/athkar_05.mp3">أذكار الصباح - فارس عباد</option>
-            <option value="https://archive.org/download/athkar-idrees-abkar/athkar_06.mp3">أذكار المساء - فارس عباد</option>
-        </select>
+    <div class="section">
+        <label>📿 أذكار الصباح والمساء (مع العداد):</label>
+        <div class="athkar-buttons">
+            <button class="athkar-btn" onclick="showAthkar('sabah')">☀️ أذكار الصباح</button>
+            <button class="athkar-btn" style="background:#8e44ad;" onclick="showAthkar('masa')">🌙 أذكار المساء</button>
+        </div>
+        <div id="athkar-content"></div>
     </div>
     
     <div class="section">
@@ -197,9 +83,7 @@ value="https://archive.org/download/Said_bin_Misfer_Qahtani-Ta2amolat.fi.Seera-U
             <option value="https://archive.org/download/23-1436-1/%D9%85%D8%A7_%D8%B5%D8%AD%D8%A9_%D9%82%D8%B5%D8%A9_%D8%B9%D8%A8%D8%AF_%D8%A7%D9%84%D9%84%D9%87_%D8%A8%D9%86_%D8%AD%D8%B0%D8%A7%D9%81%D8%A9_%D8%A7%D9%84%D8%B3%D9%87%D9%85%D9%8A_%D9%85%D8%B9_%D9%85%D9%84%D9%83_%D8%A7%D9%84%D8%B1%D9%88%D9%85__27__%D8%AC%D9%85%D8%A7%D8%AF_%D9%89_%D8%A7%D9%84%D8%A3%D9%88%D9%84%D9%89__1436__%D9%87.mp3">4. قصة عبدالله بن حذافة</option>
             <option value="https://archive.org/download/23-1436-1/%D9%84%D9%85%D8%A7%D8%B0%D8%A7_%D9%83%D8%A7%D9%86_%D9%82%D8%B7%D8%B9_%D8%A7%D9%84%D8%B7%D8%B1%D9%8A%D9%82_%D9%85%D8%AE%D8%A7%D9%84%D9%81%D8%A9_%D9%84%D9%84%D8%B4%D8%B1%D8%B9_%D9%88%D9%85%D8%A7%D8%B0%D8%A7_%D8%B9%D9%86_%D9%82%D8%B5%D8%A9_%D8%A3%D8%A8%D9%8A_%D8%AC%D9%86%D8%AF%D9%84_17_%D8%B5%D9%81%D8%B1_1433_%D9%87%D9%80_%281%29.mp3">5. قصة أبي جندل</option>
             <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D9%88%D9%85%D8%B9%D9%87%D8%A7_%D8%A8%D9%8A%D8%A7%D9%86_%D8%A3%D9%86_%D8%A7%D9%84%D8%A8%D9%8A%D8%B9%D8%A9_%D9%85%D9%86_%D8%B7%D8%B1%D9%82_%D8%AA%D8%A3%D8%B3%D9%8A%D8%B3_%D8%A7%D9%84%D8%AD%D8%B2%D8%A8%D9%8A%D8%A9___4___%D8%B5%D9%81%D8%B1__1437__%D9%87%D9%80_%281%29.mp3">6. قصة البيعة والحزبية</option>
-            <option value="https://archive.org/downlo
-                
-                ad/23-1436-1/%D9%82%D8%B5%D8%A9_%D9%87%D9%84_%D8%A3%D9%86%D8%AA_%D8%A7%D9%84%D8%AE%D8%B6%D8%B1__8_%D9%85%D8%AD%D8%B1%D9%85_1436_%D9%87%D9%80_%281%29.mp3">7. قصة هل أنت الخضر</option>
+            <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D9%87%D9%84_%D8%A3%D9%86%D8%AA_%D8%A7%D9%84%D8%AE%D8%B6%D8%B1__8_%D9%85%D8%AD%D8%B1%D9%85_1436_%D9%87%D9%80_%281%29.mp3">7. قصة هل أنت الخضر</option>
             <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D9%85%D9%86_%D9%83%D8%AA%D8%A7%D8%A8_%D8%A7%D9%84%D8%B2%D9%87%D8%AF__%D8%B9%D9%86_%D8%B5%D9%84%D8%A7%D8%A9_%D8%A7%D9%84%D9%84%D9%8A%D9%84___11__%D8%AC%D9%85%D8%A7%D8%AF%D9%89_%D8%A7%D9%84%D8%A2%D8%AE%D8%B1%D8%A9__1436__%D9%87%D9%80_%281%29.mp3">8. قصة صلاة الليل</option>
             <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D9%85%D9%86_%D8%AE%D9%84%D9%82_%D8%A7%D9%84%D8%A8%D8%AD%D8%B1___9__%D8%B4%D9%88%D8%A7%D9%84__1436__%D9%87%D9%80_%281%29.mp3">9. قصة من خلق البحر</option>
             <option value="https://archive.org/download/23-1436-1/%D9%82%D8%B5%D8%A9_%D9%85%D9%81%D9%8A%D8%AF%D8%A9_%D9%81%D9%8A_%D8%A8%D8%A7%D8%A8_%D8%A7%D9%84%D8%AF%D8%B9%D9%88%D8%A9_%D8%A5%D9%84%D9%89_%D8%A7%D9%84%D9%84%D9%87__23__%D8%B0%D9%8A_%D8%A7%D9%84%D8%AD%D8%AC%D8%A9__1436__%D9%87%D9%80_%281%29.mp3">10. قصة مفيدة في الدعوة</option>
@@ -237,12 +121,10 @@ value="https://archive.org/download/Said_bin_Misfer_Qahtani-Ta2amolat.fi.Seera-U
         </select>
     </div>
 
-                
-
     <div class="player-card">
         <div id="status">📢 اختر ما تريد الاستماع إليه</div>
         <audio id="mainPlayer" controls></audio>
-        <div class="dev-credit">ببرمجة:   ابورغد علي فاتح</div>
+        <div class="dev-credit">برمجة وتطوير: ابورغد علي فاتح</div>
     </div>
 </div>
 
@@ -252,40 +134,18 @@ value="https://archive.org/download/Said_bin_Misfer_Qahtani-Ta2amolat.fi.Seera-U
     const qSelect = document.getElementById('quranSelect');
     const rSelect = document.getElementById('reciterSelect');
 
-    const surahs = ["الفاتحة","البقرة","آل عمران","النساء","المائدة","الأنعام","الأعراف","الأنفال","التوبة","يونس","هود","يوسف","الرعد","إبراهيم","الحجر","النحل","الإسراء","الكهف","مريم","طه","الأنبياء","الحج","المؤمنون","النور","الفرقان","الشعراء","النمل","القصص","العنكبوت","الروم","لقمان","السجدة","الأحزاب","سبأ","فاطر","يس","الصافات","ص","الزمر","غافر","فصلت","الشورى","الزخرف","الدخان","الجاثية","الأحقاف","محمد","الفتح","الحجرات","ق","الذاريات","الطور","النجم","القمر","الرحمن","الواقعة","الحديد","المجادلة","الحشر","الممتحنة","الصف","الجمعة","المنافقون","التغابن","الطلاق","التحريم","الملك","القلم","الحاقة","المعارج","نوح","الجن","المزمل","المدثر","القيامة","الإنسان","المرسلات","النبأ","النازعات","عبس","التكوير","الانفطار","المطففين","الإنشقاق","البروج","الطارق","الأعلى","الغاشية","الفجر","البلد","الشمس","الليل","الضحى","الشرح","التين","العلق","القدر","البينة","الزلزلة","العاديات","القارعة","التكاثر","العصر","الهمزة","الفيل","قريش","الماعون","الكوثر","الكافرون","النصر","المسد","الإخلاص","الفلق","الناس"];
-
-    function updateSurahs() {
-        const servers = {
-            "maher": "https://server12.mp3quran.net/maher/",
-            "abkr": "https://server6.mp3quran.net/abkr/",
-            "gham": "https://server7.mp3quran.net/s_gmd/"
-        };
-        const base = servers[rSelect.value];
-        qSelect.innerHTML = '<option value="">-- اختر السورة --</option>';
-        surahs.forEach((s, i) => {
-            let opt = document.createElement('option');
-            opt.value = base + (i+1).toString().padStart(3, '0') + ".mp3";
-            opt.text = "سورة " + s;
-            qSelect.add(opt);
-        });
-    }
-
-    function runAudio(el) {
-        if(el.value) {
-            player.src = el.value;
-            status.innerText = "⏳ جاري تحميل: " + el.options[el.selectedIndex].text;
-            player.play().catch(e => {
-                status.innerText = "❌ تعذر التشغيل، يرجى المحاولة لاحقاً";
-            });
-            player.onplaying = () => status.innerText = "▶️ يتم الآن تشغيل: " + el.options[el.selectedIndex].text;
-        }
-    }
-
-    updateSurahs();
-    setInterval(() => {
-        // تحديث الوقت لتوقيت مكة (السعودية)
-        document.getElementById('pTime').innerText = new Date().toLocaleTimeString('ar-SA');
-    }, 1000);
-</script>
-</body>
-</html>
+    // === 1. قائمة القراء (20 قارئ) ===
+    const recitersList = [
+        {name: "ماهر المعيقلي", url: "https://server12.mp3quran.net/maher/"},
+        {name: "مشاري العفاسي", url: "https://server8.mp3quran.net/afs/"},
+        {name: "عبدالرحمن السديس", url: "https://server11.mp3quran.net/sds/"},
+        {name: "سعد الغامدي", url: "https://server7.mp3quran.net/s_gmd/"},
+        {name: "سعود الشريم", url: "https://server7.mp3quran.net/shur/"},
+        {name: "ياسر الدوسري", url: "https://server11.mp3quran.net/yasser/"},
+        {name: "أحمد العجمي", url: "https://server10.mp3quran.net/ajm/"},
+        {name: "عبدالباسط عبدالصمد (مجود)", url: "https://server7.mp3quran.net/basit/Mujawwad/"},
+        {name: "محمد صديق المنشاوي", url: "https://server10.mp3quran.net/minsh/"},
+        {name: "محمود خليل الحصري", url: "https://server13.mp3quran.net/husr/"},
+        {name: "ناصر القطامي", url: "https://server6.mp3quran.net/qtm/"},
+        {name: "إدريس أبكر", url: "https://server6.mp3quran.net/abkr/"},
+        {name: "فارس عباد", url: "https://server8.mp3quran.net/frs_a/"}
