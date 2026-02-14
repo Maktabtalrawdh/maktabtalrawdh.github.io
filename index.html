@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>منصة الهدى الإسلامية الشاملة</title>
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- CSS المتكامل --- */
+        /* --- 1. تنسيقات CSS العامة --- */
         :root {
-            --primary-color: #2d5a27; 
-            --secondary-color: #c5a059; 
-            --bg-color: #f4f1ea; 
+            --primary-color: #2d5a27; /* أخضر غامق */
+            --secondary-color: #c5a059; /* ذهبي */
+            --bg-color: #f8f6f2; 
             --white: #ffffff;
             --text-dark: #333;
         }
@@ -24,14 +24,16 @@
             background-color: var(--bg-color);
             color: var(--text-dark);
             line-height: 1.6;
+            padding-bottom: 120px; /* مسافة لمشغل الصوت */
         }
 
+        /* --- الهيدر والقائمة --- */
         header {
-            background: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color), #1a3c15);
             color: var(--white);
-            padding: 30px 0;
+            padding: 40px 0;
             text-align: center;
-            border-bottom: 4px solid var(--secondary-color);
+            border-bottom: 5px solid var(--secondary-color);
         }
 
         nav {
@@ -39,71 +41,144 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            overflow-x: auto;
-            white-space: nowrap;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
         nav ul {
             display: flex;
             justify-content: center;
             list-style: none;
-            padding: 10px;
+            padding: 0;
+            overflow-x: auto; /* للتمرير في الجوال */
+            white-space: nowrap;
         }
 
         nav ul li a {
+            display: block;
             color: white;
             text-decoration: none;
-            padding: 10px 15px;
-            font-size: 0.9rem;
+            padding: 15px 20px;
+            font-size: 1rem;
             transition: 0.3s;
         }
 
-        nav ul li a:hover { color: var(--secondary-color); }
+        nav ul li a:hover { background: var(--secondary-color); }
 
-        .container { width: 90%; max-width: 1200px; margin: 20px auto; }
+        .container { width: 90%; max-width: 1100px; margin: 30px auto; }
 
         .section-title {
             text-align: center;
-            margin: 30px 0;
+            margin: 40px 0 20px;
             color: var(--primary-color);
-            border-bottom: 2px solid var(--secondary-color);
+            position: relative;
             padding-bottom: 10px;
         }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--secondary-color);
+            margin: 10px auto 0;
+        }
 
-        /* المسبحة الإلكترونية */
-        .tasbih-section {
+        /* --- 2. تنسيق قسم القرآن (القوائم المنسدلة) --- */
+        .quran-player-box {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border: 1px solid #e0e0e0;
+            text-align: center;
+        }
+
+        .dropdown-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        select {
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 300px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        select:focus { border-color: var(--primary-color); }
+
+        .btn-play-quran {
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 12px 40px;
+            font-size: 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-play-quran:hover { background: #b08d4a; transform: translateY(-2px); }
+
+        /* --- 3. تنسيق المسبحة --- */
+        .tasbih-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             background: var(--white);
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            max-width: 400px;
+            margin: 0 auto;
         }
 
-        .counter-circle {
+        .counter-ring {
             width: 180px;
             height: 180px;
-            border: 8px solid var(--primary-color);
+            border: 10px solid var(--primary-color);
             border-radius: 50%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 20px 0;
             cursor: pointer;
+            user-select: none;
             transition: transform 0.1s;
-            background: #fff;
+            background: #f9f9f9;
         }
 
-        .counter-circle:active { transform: scale(0.95); }
+        .counter-ring:active { transform: scale(0.95); background: #e0e0e0; }
 
-        #counter-num { font-size: 3rem; font-weight: bold; color: var(--primary-color); }
+        .tasbih-btns button {
+            margin: 5px;
+            padding: 8px 15px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            color: white;
+        }
 
-        /* البطاقات */
+        .btn-reset { background: #c0392b; }
+
+        /* --- 4. تنسيق الإذاعات والبطاقات --- */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 20px;
         }
 
@@ -112,176 +187,279 @@
             padding: 20px;
             border-radius: 10px;
             text-align: center;
-            cursor: pointer;
             transition: 0.3s;
-            border: 1px solid #ddd;
+            cursor: pointer;
+            border: 1px solid #eee;
         }
 
-        .card:hover { border-color: var(--secondary-color); transform: translateY(-5px); }
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--secondary-color);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
 
-        /* مشغل الصوت */
-        .player-bar {
+        .card i { font-size: 2rem; color: var(--secondary-color); margin-bottom: 15px; }
+        .card h3 { margin-bottom: 10px; font-size: 1.1rem; }
+
+        /* --- 5. مشغل الصوت العائم --- */
+        .fixed-player {
             position: fixed;
             bottom: 0;
+            left: 0;
             width: 100%;
-            background: #1e3d1a;
+            background: #1a3c15; /* لون داكن */
             color: white;
             padding: 15px;
-            display: none;
+            display: none; /* مخفي افتراضياً */
             flex-direction: column;
             align-items: center;
             z-index: 2000;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.3);
+            border-top: 3px solid var(--secondary-color);
         }
 
-        audio { width: 80%; max-width: 600px; margin-top: 10px; }
-
-        .btn-reset { background: #c0392b; color: white; border: none; padding: 5px 15px; border-radius: 5px; margin-top: 10px; cursor: pointer; }
+        .player-info { margin-bottom: 10px; font-weight: bold; color: var(--secondary-color); }
         
-        .ramadan-card {
-            background: linear-gradient(45deg, #2d5a27, #c5a059);
+        audio {
+            width: 90%;
+            max-width: 600px;
+            height: 40px;
+            border-radius: 20px;
+        }
+
+        .close-player {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            background: none;
+            border: none;
             color: white;
-            padding: 40px;
-            border-radius: 15px;
-            text-align: center;
-            margin-top: 20px;
+            font-size: 20px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>منصة الهُدى</h1>
-        <p>موسوعة إسلامية شاملة - راديو، تلاوات، وأذكار</p>
+        <div class="container">
+            <h1><i class="fa-solid fa-kaaba"></i> منصة الهدى</h1>
+            <p>قرآن كريم • إذاعات • أذكار • دروس</p>
+        </div>
     </header>
 
     <nav>
         <ul>
-            <li><a href="#quran">القرآن</a></li>
-            <li><a href="#radio">الإذاعات</a></li>
-            <li><a href="#tasbih">المسبحة</a></li>
-            <li><a href="#lectures">المحاضرات</a></li>
-            <li><a href="#stories">السيرة والأنبياء</a></li>
-            <li><a href="#ramadan">رمضان</a></li>
+            <li><a href="#quran"><i class="fa-solid fa-book-quran"></i> القرآن الكريم</a></li>
+            <li><a href="#tasbih"><i class="fa-solid fa-fingerprint"></i> المسبحة</a></li>
+            <li><a href="#radio"><i class="fa-solid fa-radio"></i> الإذاعات</a></li>
+            <li><a href="#lectures"><i class="fa-solid fa-microphone"></i> المحاضرات</a></li>
+            <li><a href="#stories"><i class="fa-solid fa-book-open"></i> القصص</a></li>
         </ul>
     </nav>
 
-    <div class="container">
-        
-        <section id="tasbih">
-            <h2 class="section-title">المسبحة الإلكترونية</h2>
-            <div class="tasbih-section">
-                <div class="counter-circle" onclick="increment()">
-                    <span id="counter-num">0</span>
-                    <span>اضغط للتسبيح</span>
+    <main class="container">
+
+        <section id="quran">
+            <h2 class="section-title">المصحف المرتل (كامل)</h2>
+            <div class="quran-player-box">
+                <div class="dropdown-group">
+                    <select id="readerSelect">
+                        <option value="" disabled selected>اختر القارئ...</option>
+                        </select>
+                    
+                    <select id="surahSelect">
+                        <option value="" disabled selected>اختر السورة...</option>
+                        </select>
                 </div>
-                <button class="btn-reset" onclick="reset()">إعادة ضبط</button>
+                <button class="btn-play-quran" onclick="playQuran()">
+                    <i class="fa-solid fa-play"></i> استماع للتلاوة
+                </button>
             </div>
         </section>
 
-        <section id="quran">
-            <h2 class="section-title">القرآن الكريم (12 قارئ)</h2>
-            <div class="grid" id="quran-grid"></div>
+        <section id="tasbih">
+            <h2 class="section-title">المسبحة الإلكترونية</h2>
+            <div class="tasbih-container">
+                <div class="counter-ring" onclick="incrementTasbih()">
+                    <span id="tasbih-count">0</span>
+                </div>
+                <p style="color: #666; margin-bottom: 10px;">اضغط داخل الدائرة للتسبيح</p>
+                <div class="tasbih-btns">
+                    <button class="btn-reset" onclick="resetTasbih()">تصفير العداد</button>
+                </div>
+            </div>
         </section>
 
         <section id="radio">
-            <h2 class="section-title">الإذاعات المباشرة</h2>
+            <h2 class="section-title">إذاعات البث المباشر</h2>
             <div class="grid">
                 <div class="card" onclick="playAudio('إذاعة القرآن الكريم - القاهرة', 'https://qurango.net/radio/tarabeel')">
-                    <i class="fa fa-tower-broadcast"></i> <h3>إذاعة القاهرة</h3>
-                </div>
-                <div class="card" onclick="playAudio('تلاوات خاشعة', 'https://qurango.net/radio/salma')">
-                    <i class="fa fa-heart"></i> <h3>تلاوات خاشعة</h3>
+                    <i class="fa-solid fa-tower-broadcast"></i>
+                    <h3>إذاعة القاهرة</h3>
+                    <p>بث مباشر 24 ساعة</p>
                 </div>
                 <div class="card" onclick="playAudio('إذاعة السنة النبوية', 'https://qurango.net/radio/suna')">
-                    <i class="fa fa-book-open"></i> <h3>إذاعة السنة</h3>
+                    <i class="fa-solid fa-mosque"></i>
+                    <h3>إذاعة السنة</h3>
+                    <p>من المدينة المنورة</p>
+                </div>
+                <div class="card" onclick="playAudio('تلاوات خاشعة متنوعة', 'https://qurango.net/radio/salma')">
+                    <i class="fa-solid fa-heart"></i>
+                    <h3>تلاوات خاشعة</h3>
+                    <p>مختارات من أجمل الأصوات</p>
                 </div>
             </div>
         </section>
 
-        <section id="stories">
-            <h2 class="section-title">السيرة وقصص الأنبياء</h2>
-            <div class="grid">
-                <div class="card"><h3>قصص الأنبياء</h3><p>مجموعة دروس صوتية</p></div>
-                <div class="card"><h3>السيرة النبوية</h3><p>حياة الرسول ﷺ</p></div>
-            </div>
-        </section>
+        <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-top: 40px;">
+            <section id="lectures" style="flex: 1; min-width: 300px;">
+                <h2 class="section-title">محاضرات ودروس</h2>
+                <div class="card">
+                    <i class="fa-solid fa-person-chalkboard"></i>
+                    <h3>سلسلة الدار الآخرة</h3>
+                    <p>عمر عبد الكافي</p>
+                </div>
+                <div class="card" style="margin-top: 10px;">
+                    <i class="fa-solid fa-book"></i>
+                    <h3>تفسير القرآن</h3>
+                    <p>الشيخ الشعراوي</p>
+                </div>
+            </section>
 
-        <section id="ramadan">
-            <div class="ramadan-card">
-                <h2>قسم رمضان المبارك</h2>
-                <p>محاضرات ودروس رمضانية مختارة لتهيئة النفوس.</p>
-            </div>
-        </section>
+            <section id="stories" style="flex: 1; min-width: 300px;">
+                <h2 class="section-title">قصص وسير</h2>
+                <div class="card">
+                    <i class="fa-solid fa-horse"></i>
+                    <h3>السيرة النبوية</h3>
+                    <p>راغب السرجاني</p>
+                </div>
+                <div class="card" style="margin-top: 10px;">
+                    <i class="fa-solid fa-users"></i>
+                    <h3>قصص الصحابة</h3>
+                    <p>نبيل العوضي</p>
+                </div>
+            </section>
+        </div>
 
-    </div>
+    </main>
 
-    <div class="player-bar" id="player-bar">
-        <span id="track-name">جاري التشغيل...</span>
-        <audio id="audio-element" controls src=""></audio>
-        <button onclick="closePlayer()" style="background:none; border:none; color:white; cursor:pointer; margin-top:5px;">إغلاق [x]</button>
+    <div class="fixed-player" id="fixed-player">
+        <button class="close-player" onclick="closePlayer()">×</button>
+        <div class="player-info" id="player-status">جاري الاستعداد...</div>
+        <audio id="main-audio" controls autoplay></audio>
     </div>
 
     <script>
-        // --- JavaScript المتكامل ---
-
-        // 1. بيانات القراء
+        /* --- 1. بيانات القرآن الكريم --- */
+        // قائمة بـ 12 قارئ مع روابط السيرفرات الخاصة بهم (تنتهي بـ /)
         const readers = [
-            { name: "مشاري العفاسي", url: "https://server8.mp3quran.net/afs/001.mp3" },
-            { name: "عبد الباسط عبد الصمد", url: "https://server7.mp3quran.net/basit/001.mp3" },
-            { name: "ماهر المعيقلي", url: "https://server12.mp3quran.net/maher/001.mp3" },
-            { name: "سعود الشريم", url: "https://server7.mp3quran.net/shur/001.mp3" },
-            { name: "ياسر الدوسري", url: "https://server11.mp3quran.net/yasser/001.mp3" },
-            { name: "محمد الصديق المنشاوي", url: "https://server10.mp3quran.net/minsh/001.mp3" },
-            { name: "أحمد العجمي", url: "https://server10.mp3quran.net/ajm/001.mp3" },
-            { name: "سعد الغامدي", url: "https://server7.mp3quran.net/s_gmd/001.mp3" },
-            { name: "فارس عباد", url: "https://server8.mp3quran.net/frs_a/001.mp3" },
-            { name: "محمود خليل الحصري", url: "https://server13.mp3quran.net/husr/001.mp3" },
-            { name: "إدريس أبكر", url: "https://server6.mp3quran.net/abkr/001.mp3" },
-            { name: "ناصر القطامي", url: "https://server6.mp3quran.net/qtm/001.mp3" }
+            { name: "مشاري العفاسي", server: "https://server8.mp3quran.net/afs/" },
+            { name: "عبد الباسط عبد الصمد (المجود)", server: "https://server7.mp3quran.net/basit/" },
+            { name: "ماهر المعيقلي", server: "https://server12.mp3quran.net/maher/" },
+            { name: "سعد الغامدي", server: "https://server7.mp3quran.net/s_gmd/" },
+            { name: "ياسر الدوسري", server: "https://server11.mp3quran.net/yasser/" },
+            { name: "أحمد العجمي", server: "https://server10.mp3quran.net/ajm/" },
+            { name: "محمد الصديق المنشاوي", server: "https://server10.mp3quran.net/minsh/" },
+            { name: "سعود الشريم", server: "https://server7.mp3quran.net/shur/" },
+            { name: "فارس عباد", server: "https://server8.mp3quran.net/frs_a/" },
+            { name: "محمود خليل الحصري", server: "https://server13.mp3quran.net/husr/" },
+            { name: "إدريس أبكر", server: "https://server6.mp3quran.net/abkr/" },
+            { name: "ناصر القطامي", server: "https://server6.mp3quran.net/qtm/" }
         ];
 
-        // 2. توليد قائمة القرآن
-        const quranGrid = document.getElementById('quran-grid');
-        readers.forEach(r => {
-            const div = document.createElement('div');
-            div.className = 'card';
-            div.onclick = () => playAudio(r.name, r.url);
-            div.innerHTML = `<i class="fa fa-microphone"></i> <h3>${r.name}</h3> <p>سورة الفاتحة</p>`;
-            quranGrid.appendChild(div);
+        // قائمة أسماء السور (114 سورة)
+        const surahNames = [
+            "الفاتحة", "البقرة", "آل عمران", "النساء", "المائدة", "الأنعام", "الأعراف", "الأنفال", "التوبة", "يونس",
+            "هود", "يوسف", "الرعد", "إبراهيم", "الحجر", "النحل", "الإسراء", "الكهف", "مريم", "طه",
+            "الأنبياء", "الحج", "المؤمنون", "النور", "الفرقان", "الشعراء", "النمل", "القصص", "العنكبوت", "الروم",
+            "لقمان", "السجدة", "الأحزاب", "سبأ", "فاطر", "يس", "الصافات", "ص", "الزمر", "غافر",
+            "فصلت", "الشورى", "الزخرف", "الدخان", "الجاثية", "الأحقاف", "محمد", "الفتح", "الحجرات", "ق",
+            "الذاريات", "الطور", "النجم", "القمر", "الرحمن", "الواقعة", "الحديد", "المجادلة", "الحشر", "الممتحنة",
+            "الصف", "الجمعة", "المنافقون", "التغابن", "الطلاق", "التحريم", "الملك", "القلم", "الحاقة", "المعارج",
+            "نوح", "الجن", "المزمل", "المدثر", "القيامة", "الإنسان", "المرسلات", "النبأ", "النازعات", "عبس",
+            "التكوير", "الإنفطار", "المطففين", "الإنشقاق", "البروج", "الطارق", "الأعلى", "الغاشية", "الفجر", "البلد",
+            "الشمس", "الليل", "الضحى", "الشرح", "التين", "العلق", "القدر", "البينة", "الزلزلة", "العاديات",
+            "القارعة", "التكاثر", "العصر", "الهمزة", "الفيل", "قريش", "الماعون", "الكوثر", "الكافرون", "النصر",
+            "المسد", "الإخلاص", "الفلق", "الناس"
+        ];
+
+        /* --- 2. تهيئة القوائم المنسدلة عند التحميل --- */
+        const readerSelect = document.getElementById('readerSelect');
+        const surahSelect = document.getElementById('surahSelect');
+        const audioPlayer = document.getElementById('main-audio');
+        const playerBox = document.getElementById('fixed-player');
+        const playerStatus = document.getElementById('player-status');
+
+        // تعبئة القراء
+        readers.forEach((reader, index) => {
+            let option = document.createElement('option');
+            option.value = index;
+            option.text = reader.name;
+            readerSelect.add(option);
         });
 
-        // 3. وظائف مشغل الصوت
-        const playerBar = document.getElementById('player-bar');
-        const audio = document.getElementById('audio-element');
-        const trackName = document.getElementById('track-name');
+        // تعبئة السور
+        surahNames.forEach((surah, index) => {
+            let option = document.createElement('option');
+            option.value = index + 1;
+            option.text = `${index + 1}. ${surah}`;
+            surahSelect.add(option);
+        });
 
-        function playAudio(name, url) {
-            trackName.innerText = "أنت تستمع إلى: " + name;
-            audio.src = url;
-            playerBar.style.display = 'flex';
-            audio.play();
+        /* --- 3. وظائف التشغيل --- */
+        
+        // تشغيل القرآن من القائمة المنسدلة
+        function playQuran() {
+            const readerIndex = readerSelect.value;
+            const surahIndex = surahSelect.value;
+
+            if(readerIndex === "" || surahIndex === "") {
+                alert("يرجى اختيار القارئ والسورة أولاً");
+                return;
+            }
+
+            const selectedReader = readers[readerIndex];
+            // تحويل رقم السورة إلى 3 خانات (مثلاً 1 يصبح 001)
+            const paddedSurah = String(surahIndex).padStart(3, '0');
+            const url = `${selectedReader.server}${paddedSurah}.mp3`;
+
+            playAudio(`سورة ${surahNames[surahIndex-1]} - ${selectedReader.name}`, url);
+        }
+
+        // الوظيفة العامة لتشغيل أي صوت (قرآن أو راديو)
+        function playAudio(title, url) {
+            playerBox.style.display = 'flex';
+            playerStatus.innerText = `جاري الاستماع إلى: ${title}`;
+            audioPlayer.src = url;
+            audioPlayer.play();
         }
 
         function closePlayer() {
-            playerBar.style.display = 'none';
-            audio.pause();
+            playerBox.style.display = 'none';
+            audioPlayer.pause();
         }
 
-        // 4. المسبحة الإلكترونية
-        let count = 0;
-        function increment() {
-            count++;
-            document.getElementById('counter-num').innerText = count;
-            if (count % 33 === 0) {
-                if(navigator.vibrate) navigator.vibrate(200);
+        /* --- 4. وظائف المسبحة --- */
+        let tasbihCount = 0;
+        const countDisplay = document.getElementById('tasbih-count');
+
+        function incrementTasbih() {
+            tasbihCount++;
+            countDisplay.innerText = tasbihCount;
+            
+            // اهتزاز الهاتف عند كل 33 تسبيحة
+            if (tasbihCount % 33 === 0) {
+                if(navigator.vibrate) navigator.vibrate(100);
             }
         }
 
-        function reset() {
-            count = 0;
-            document.getElementById('counter-num').innerText = count;
+        function resetTasbih() {
+            tasbihCount = 0;
+            countDisplay.innerText = 0;
         }
-    </script>
 
+    </script>
 </body>
-</html>
+        </html>
+        
