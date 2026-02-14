@@ -9,7 +9,7 @@
         :root {
             --primary: #1a3c15; 
             --gold: #c5a059;   
-            --cream: rgba(249, 247, 242, 0.92);
+            --cream: rgba(249, 247, 242, 0.94);
             --white: #ffffff;
         }
 
@@ -21,7 +21,7 @@
             background-position: center;
             background-attachment: fixed;
             color: #333; 
-            padding-bottom: 150px; 
+            padding-bottom: 160px; 
             transition: background-image 1s ease-in-out;
         }
 
@@ -113,8 +113,8 @@
 
 <div class="overlay">
     <header>
-        <h1><i class="fa-solid fa-moon"></i> منصة الهُدى</h1>
-        <p>المكتبة الإسلامية الشاملة - تلاوات، دروس، وسير</p>
+        <h1><i class="fa-solid fa-kaaba"></i> منصة الهُدى</h1>
+        <p>المصحف الكامل والبث المباشر والمكتبة الصوتية</p>
     </header>
 
     <div class="container">
@@ -126,11 +126,33 @@
         </div>
 
         <div class="dropdown-card">
-            <h3><i class="fa-solid fa-scroll"></i> قصص الأنبياء - الشيخ عثمان الخميس</h3>
+            <h3><i class="fa-solid fa-tower-broadcast"></i> إذاعات بث مباشر</h3>
+            <select id="radio-select">
+                <option value="https://qurango.net/radio/tarabeel">إذاعة القرآن الكريم - القاهرة</option>
+                <option value="https://qurango.net/radio/saudi">إذاعة القرآن الكريم - المملكة العربية السعودية</option>
+                <option value="https://qurango.net/radio/suna">إذاعة السنة النبوية - المدينة المنورة</option>
+                <option value="https://qurango.net/radio/roqiah">إذاعة الرقية الشرعية</option>
+                <option value="https://qurango.net/radio/tafseer">إذاعة تفسير القرآن الكريم</option>
+            </select>
+            <button class="play-btn" onclick="handleSelect('radio-select')"><i class="fa-solid fa-radio"></i> استماع للبث المباشر</button>
+        </div>
+
+        <div class="dropdown-card">
+            <h3><i class="fa-solid fa-hands-praying"></i> الأذكار والأدعية</h3>
+            <select id="azkar-select">
+                <option value="https://download.tvquran.com/download/Azkar/Morning_Azkar.mp3">أذكار الصباح</option>
+                <option value="https://download.tvquran.com/download/Azkar/Evening_Azkar.mp3">أذكار المساء</option>
+                <option value="https://ia800508.us.archive.org/15/items/Duaa_Quran/Duaa01.mp3">دعاء ختم القرآن الكريم</option>
+                <option value="https://server10.mp3quran.net/minsh/001.mp3">الرقية الشرعية - المنشاوي</option>
+            </select>
+            <button class="play-btn" onclick="handleSelect('azkar-select')"><i class="fa-solid fa-heart"></i> تشغيل</button>
+        </div>
+
+        <div class="dropdown-card">
+            <h3><i class="fa-solid fa-scroll"></i> قصص الأنبياء - عثمان الخميس</h3>
             <select id="khamis-select">
                 <option value="https://archive.org/download/Othman-Al-Khamis-Anbiya/01.mp3">قصة آدم عليه السلام</option>
                 <option value="https://archive.org/download/Othman-Al-Khamis-Anbiya/02.mp3">قصة نوح عليه السلام</option>
-                <option value="https://archive.org/download/Othman-Al-Khamis-Anbiya/03.mp3">قصة هود وصالح عليهما السلام</option>
                 <option value="https://archive.org/download/Othman-Al-Khamis-Anbiya/04.mp3">قصة إبراهيم عليه السلام</option>
                 <option value="https://archive.org/download/Othman-Al-Khamis-Anbiya/07.mp3">قصة يوسف عليه السلام</option>
             </select>
@@ -138,35 +160,13 @@
         </div>
 
         <div class="dropdown-card">
-            <h3><i class="fa-solid fa-mosque"></i> السيرة النبوية - الشيخ سعيد بن مسفر</h3>
+            <h3><i class="fa-solid fa-mosque"></i> السيرة النبوية - سعيد بن مسفر</h3>
             <select id="mesfer-select">
                 <option value="https://archive.org/download/Saeed-Bin-Mesfer-Sira/01.mp3">المقدمة وأهمية السيرة</option>
                 <option value="https://archive.org/download/Saeed-Bin-Mesfer-Sira/02.mp3">نسبه ﷺ وميلاده</option>
                 <option value="https://archive.org/download/Saeed-Bin-Mesfer-Sira/03.mp3">بعثته ﷺ ونزول الوحي</option>
-                <option value="https://archive.org/download/Saeed-Bin-Mesfer-Sira/10.mp3">الهجرة إلى المدينة</option>
             </select>
             <button class="play-btn" onclick="handleSelect('mesfer-select')"><i class="fa-solid fa-microphone-lines"></i> تشغيل الدرس</button>
-        </div>
-
-        <div class="dropdown-card">
-            <h3><i class="fa-solid fa-cloud-moon"></i> محاضرات رمضان</h3>
-            <select id="ramadan-select">
-                <option value="https://archive.org/download/Ramadan-Lectures-Sample/Lesson1.mp3">كيف نستقبل رمضان؟</option>
-                <option value="https://archive.org/download/Ramadan-Lectures-Sample/Lesson2.mp3">أسرار الصيام وعظمته</option>
-                <option value="https://archive.org/download/Ramadan-Lectures-Sample/Lesson3.mp3">ليلة القدر والقيام</option>
-            </select>
-            <button class="play-btn" onclick="handleSelect('ramadan-select')"><i class="fa-solid fa-star"></i> استماع</button>
-        </div>
-
-        <div class="dropdown-card">
-            <h3><i class="fa-solid fa-layer-group"></i> محاضرات منوعة</h3>
-            <select id="mix-select">
-                <option value="https://ia800508.us.archive.org/15/items/Duaa_Quran/Duaa01.mp3">الرقية الشرعية المطولة</option>
-                <option value="https://download.tvquran.com/download/Azkar/Morning_Azkar.mp3">أذكار الصباح</option>
-                <option value="https://download.tvquran.com/download/Azkar/Evening_Azkar.mp3">أذكار المساء</option>
-                <option value="https://qurango.net/radio/tarabeel">بث مباشر - إذاعة القاهرة</option>
-            </select>
-            <button class="play-btn" onclick="handleSelect('mix-select')"><i class="fa-solid fa-volume-high"></i> تشغيل</button>
         </div>
     </div>
 </div>
@@ -182,7 +182,7 @@
         'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1600',
         'https://images.unsplash.com/photo-1591604129939-f1efa4d8f7ec?q=80&w=1600',
         'https://images.unsplash.com/photo-1564769662533-4f00a87b4056?q=80&w=1600',
-        'https://images.unsplash.com/photo-1590075865003-e48277da55d5?q=80&w=1600'
+        'https://images.unsplash.com/photo-1519817650390-64a93db51149?q=80&w=1600'
     ];
 
     function setRandomBackground() {
