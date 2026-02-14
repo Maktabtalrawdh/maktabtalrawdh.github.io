@@ -9,53 +9,55 @@
         :root {
             --primary: #1a3c15; 
             --gold: #c5a059;   
-            --cream: rgba(249, 247, 242, 0.9); /* جعلنا الخلفية شفافة قليلاً لتظهر صورة الخلفية */
+            --cream: rgba(249, 247, 242, 0.92);
             --white: #ffffff;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
 
         body { 
-            background-color: #111; /* لون احتياطي */
+            background-color: #111;
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             color: #333; 
-            padding-bottom: 140px; 
+            padding-bottom: 150px; 
             transition: background-image 1s ease-in-out;
         }
 
-        /* طبقة حماية لجعل المحتوى مقروءاً فوق الصور */
         .overlay {
-            background-color: rgba(0, 0, 0, 0.4);
+            background-color: rgba(0, 0, 0, 0.5);
             min-height: 100vh;
             width: 100%;
+            padding-bottom: 20px;
         }
 
         header {
             background: var(--primary);
             color: var(--white);
-            padding: 30px;
+            padding: 25px;
             text-align: center;
             border-bottom: 5px solid var(--gold);
             opacity: 0.95;
+            margin-bottom: 20px;
         }
 
-        .container { max-width: 800px; margin: 20px auto; padding: 15px; position: relative; z-index: 1; }
+        .container { max-width: 850px; margin: 0 auto; padding: 0 15px; position: relative; z-index: 1; }
 
         .dropdown-card {
             background: var(--cream);
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            margin-bottom: 20px;
-            border-right: 5px solid var(--gold);
-            backdrop-filter: blur(5px); /* تأثير ضبابي جميل */
+            padding: 18px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            margin-bottom: 15px;
+            border-right: 6px solid var(--gold);
+            backdrop-filter: blur(8px);
         }
 
         .dropdown-card h3 {
             color: var(--primary);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -63,20 +65,21 @@
 
         select {
             width: 100%;
-            padding: 12px;
-            border: 2px solid #ddd;
+            padding: 10px;
+            border: 1px solid #ccc;
             border-radius: 8px;
-            font-size: 15px;
+            font-size: 14px;
             outline: none;
             margin-bottom: 10px;
             background: white;
+            cursor: pointer;
         }
 
         .play-btn {
             background: var(--primary);
             color: white;
             border: none;
-            padding: 12px;
+            padding: 10px;
             border-radius: 8px;
             width: 100%;
             cursor: pointer;
@@ -88,84 +91,98 @@
             transition: 0.3s;
         }
 
-        .play-btn:hover { background: var(--gold); }
+        .play-btn:hover { background: var(--gold); transform: scale(1.01); }
 
-        /* مشغل الصوت */
         .player-bar {
             position: fixed;
             bottom: 0; width: 100%;
-            background: #11260d;
+            background: #0d1a0b;
             color: white;
-            padding: 20px;
+            padding: 15px;
             text-align: center;
             z-index: 1000;
             display: none;
-            box-shadow: 0 -5px 15px rgba(0,0,0,0.5);
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.6);
         }
 
-        audio { width: 100%; max-width: 600px; margin-top: 10px; }
-        #track-info { font-size: 0.9rem; color: var(--gold); margin-bottom: 5px; font-weight: bold; }
+        audio { width: 100%; max-width: 600px; margin-top: 8px; }
+        #track-info { font-size: 0.9rem; color: var(--gold); margin-bottom: 4px; font-weight: bold; }
     </style>
 </head>
 <body id="dynamic-bg">
 
 <div class="overlay">
     <header>
-        <h1><i class="fa-solid fa-kaaba"></i> منصة الهُدى</h1>
-        <p>المصحف الكامل والمكتبة الصوتية الشاملة</p>
+        <h1><i class="fa-solid fa-moon"></i> منصة الهُدى</h1>
+        <p>المكتبة الإسلامية الشاملة - تلاوات، دروس، وسير</p>
     </header>
 
     <div class="container">
         <div class="dropdown-card">
-            <h3><i class="fa-solid fa-book-quran"></i> القرآن الكريم (12 قارئ)</h3>
+            <h3><i class="fa-solid fa-book-quran"></i> المصحف الشريف (12 قارئ)</h3>
             <select id="quran-reader"></select>
             <select id="quran-surah"></select>
             <button class="play-btn" onclick="playQuran()"><i class="fa-solid fa-play"></i> تشغيل السورة</button>
         </div>
 
         <div class="dropdown-card">
-            <h3><i class="fa-solid fa-mosque"></i> السيرة والأنبياء</h3>
-            <select id="sira-select">
-                <option value="https://ia800201.us.archive.org/17/items/001Adam_201712/001-adam.mp3">قصة آدم عليه السلام</option>
-                <option value="https://ia800201.us.archive.org/17/items/001Adam_201712/002-nuh.mp3">قصة نوح عليه السلام</option>
-                <option value="https://ia800201.us.archive.org/17/items/001Adam_201712/003-ibrahim.mp3">قصة إبراهيم عليه السلام</option>
-                <option value="https://server14.mp3quran.net/bader/001.mp3">مقدمة السيرة - نبيل العوضي</option>
+            <h3><i class="fa-solid fa-scroll"></i> قصص الأنبياء - الشيخ عثمان الخميس</h3>
+            <select id="khamis-select">
+                <option value="https://archive.org/download/Othman-Al-Khamis-Anbiya/01.mp3">قصة آدم عليه السلام</option>
+                <option value="https://archive.org/download/Othman-Al-Khamis-Anbiya/02.mp3">قصة نوح عليه السلام</option>
+                <option value="https://archive.org/download/Othman-Al-Khamis-Anbiya/03.mp3">قصة هود وصالح عليهما السلام</option>
+                <option value="https://archive.org/download/Othman-Al-Khamis-Anbiya/04.mp3">قصة إبراهيم عليه السلام</option>
+                <option value="https://archive.org/download/Othman-Al-Khamis-Anbiya/07.mp3">قصة يوسف عليه السلام</option>
             </select>
-            <button class="play-btn" onclick="handleSelect('sira-select')"><i class="fa-solid fa-scroll"></i> استماع</button>
+            <button class="play-btn" onclick="handleSelect('khamis-select')"><i class="fa-solid fa-headphones"></i> استماع للقصة</button>
         </div>
 
         <div class="dropdown-card">
-            <h3><i class="fa-solid fa-person-praying"></i> أذكار وأدعية</h3>
-            <select id="azkar-select">
+            <h3><i class="fa-solid fa-mosque"></i> السيرة النبوية - الشيخ سعيد بن مسفر</h3>
+            <select id="mesfer-select">
+                <option value="https://archive.org/download/Saeed-Bin-Mesfer-Sira/01.mp3">المقدمة وأهمية السيرة</option>
+                <option value="https://archive.org/download/Saeed-Bin-Mesfer-Sira/02.mp3">نسبه ﷺ وميلاده</option>
+                <option value="https://archive.org/download/Saeed-Bin-Mesfer-Sira/03.mp3">بعثته ﷺ ونزول الوحي</option>
+                <option value="https://archive.org/download/Saeed-Bin-Mesfer-Sira/10.mp3">الهجرة إلى المدينة</option>
+            </select>
+            <button class="play-btn" onclick="handleSelect('mesfer-select')"><i class="fa-solid fa-microphone-lines"></i> تشغيل الدرس</button>
+        </div>
+
+        <div class="dropdown-card">
+            <h3><i class="fa-solid fa-cloud-moon"></i> محاضرات رمضان</h3>
+            <select id="ramadan-select">
+                <option value="https://archive.org/download/Ramadan-Lectures-Sample/Lesson1.mp3">كيف نستقبل رمضان؟</option>
+                <option value="https://archive.org/download/Ramadan-Lectures-Sample/Lesson2.mp3">أسرار الصيام وعظمته</option>
+                <option value="https://archive.org/download/Ramadan-Lectures-Sample/Lesson3.mp3">ليلة القدر والقيام</option>
+            </select>
+            <button class="play-btn" onclick="handleSelect('ramadan-select')"><i class="fa-solid fa-star"></i> استماع</button>
+        </div>
+
+        <div class="dropdown-card">
+            <h3><i class="fa-solid fa-layer-group"></i> محاضرات منوعة</h3>
+            <select id="mix-select">
+                <option value="https://ia800508.us.archive.org/15/items/Duaa_Quran/Duaa01.mp3">الرقية الشرعية المطولة</option>
                 <option value="https://download.tvquran.com/download/Azkar/Morning_Azkar.mp3">أذكار الصباح</option>
                 <option value="https://download.tvquran.com/download/Azkar/Evening_Azkar.mp3">أذكار المساء</option>
+                <option value="https://qurango.net/radio/tarabeel">بث مباشر - إذاعة القاهرة</option>
             </select>
-            <button class="play-btn" onclick="handleSelect('azkar-select')"><i class="fa-solid fa-hands-holding"></i> تشغيل</button>
-        </div>
-
-        <div class="dropdown-card">
-            <h3><i class="fa-solid fa-radio"></i> الإذاعات</h3>
-            <select id="radio-select">
-                <option value="https://qurango.net/radio/tarabeel">إذاعة القرآن - القاهرة</option>
-                <option value="https://qurango.net/radio/suna">إذاعة السنة النبوية</option>
-            </select>
-            <button class="play-btn" onclick="handleSelect('radio-select')"><i class="fa-solid fa-tower-broadcast"></i> بث مباشر</button>
+            <button class="play-btn" onclick="handleSelect('mix-select')"><i class="fa-solid fa-volume-high"></i> تشغيل</button>
         </div>
     </div>
 </div>
 
 <div class="player-bar" id="player-bar">
-    <div id="track-info">اختر ملفاً صوتياً للاستماع</div>
+    <div id="track-info">جاري التحميل...</div>
     <audio id="main-audio" controls autoplay></audio>
 </div>
 
 <script>
     // نظام الخلفيات المتغيرة
     const bgImages = [
-        'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1600&q=80', // الحرم المكي
-        'https://images.unsplash.com/photo-1591604129939-f1efa4d8f7ec?auto=format&fit=crop&w=1600&q=80', // المسجد النبوي
-        'https://images.unsplash.com/photo-1564769662533-4f00a87b4056?auto=format&fit=crop&w=1600&q=80', // قبة الصخرة
-        'https://images.unsplash.com/photo-1590075865003-e48277da55d5?auto=format&fit=crop&w=1600&q=80'  // زخارف إسلامية
+        'https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1600',
+        'https://images.unsplash.com/photo-1591604129939-f1efa4d8f7ec?q=80&w=1600',
+        'https://images.unsplash.com/photo-1564769662533-4f00a87b4056?q=80&w=1600',
+        'https://images.unsplash.com/photo-1590075865003-e48277da55d5?q=80&w=1600'
     ];
 
     function setRandomBackground() {
@@ -180,8 +197,8 @@
         { name: "ياسر الدوسري", server: "https://server11.mp3quran.net/yasser/" },
         { name: "أحمد العجمي", server: "https://server10.mp3quran.net/ajm/" },
         { name: "سعد الغامدي", server: "https://server7.mp3quran.net/s_gmd/" },
-        { name: "المنشاوي", server: "https://server10.mp3quran.net/minsh/" },
-        { name: "الحصري", server: "https://server13.mp3quran.net/husr/" },
+        { name: "محمد الصديق المنشاوي", server: "https://server10.mp3quran.net/minsh/" },
+        { name: "محمود خليل الحصري", server: "https://server13.mp3quran.net/husr/" },
         { name: "إدريس أبكر", server: "https://server6.mp3quran.net/abkr/" },
         { name: "ناصر القطامي", server: "https://server6.mp3quran.net/qtm/" },
         { name: "سعود الشريم", server: "https://server7.mp3quran.net/shur/" },
@@ -191,7 +208,7 @@
     const surahs = ["الفاتحة", "البقرة", "آل عمران", "النساء", "المائدة", "الأنعام", "الأعراف", "الأنفال", "التوبة", "يونس", "هود", "يوسف", "الرعد", "إبراهيم", "الحجر", "النحل", "الإسراء", "الكهف", "مريم", "طه", "الأنبياء", "الحج", "المؤمنون", "النور", "الفرقان", "الشعراء", "النمل", "القصص", "العنكبوت", "الروم", "لقمان", "السجدة", "الأحزاب", "سبأ", "فاطر", "يس", "الصافات", "ص", "الزمر", "غافر", "فصلت", "الشورى", "الزخرف", "الدخان", "الجاثية", "الأحقاف", "محمد", "الفتح", "الحجرات", "ق", "الذاريات", "الطور", "النجم", "القمر", "الرحمن", "الواقعة", "الحديد", "المجادلة", "الحشر", "الممتحنة", "الصف", "الجمعة", "المنافقون", "التغابن", "الطلاق", "التحريم", "الملك", "القلم", "الحاقة", "المعارج", "نوح", "الجن", "المزمل", "المدثر", "القيامة", "الإنسان", "المرسلات", "النبأ", "النازعات", "عبس", "التكوير", "الإنفطار", "المطففين", "الإنشقاق", "البروج", "الطارق", "الأعلى", "الغاشية", "الفجر", "البلد", "الشمس", "الليل", "الضحى", "الشرح", "التين", "العلق", "القدر", "البينة", "الزلزلة", "العاديات", "القارعة", "التكاثر", "العصر", "الهمزة", "الفيل", "قريش", "الماعون", "الكوثر", "الكافرون", "النصر", "المسد", "الإخلاص", "الفلق", "الناس"];
 
     window.onload = () => {
-        setRandomBackground(); // تغيير الخلفية عند التحميل
+        setRandomBackground();
         const rSelect = document.getElementById('quran-reader');
         const sSelect = document.getElementById('quran-surah');
         readers.forEach((r, i) => rSelect.add(new Option(r.name, i)));
@@ -199,6 +216,7 @@
     };
 
     function startAudio(title, url) {
+        if(!url) return;
         const bar = document.getElementById('player-bar');
         const audio = document.getElementById('main-audio');
         bar.style.display = 'block';
@@ -211,7 +229,7 @@
         const r = readers[document.getElementById('quran-reader').value];
         const sNum = document.getElementById('quran-surah').value;
         const url = `${r.server}${String(sNum).padStart(3, '0')}.mp3`;
-        startAudio(`تلاوة: سورة ${surahs[sNum-1]} - ${r.name}`, url);
+        startAudio(`تلاوة: سورة ${surahs[sNum-1]} - بصوت ${r.name}`, url);
     }
 
     function handleSelect(id) {
